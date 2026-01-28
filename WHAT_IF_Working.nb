@@ -1,0 +1,3425 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[    148530,       3417]
+NotebookOptionsPosition[    147932,       3398]
+NotebookOutlinePosition[    148432,       3416]
+CellTagsIndexPosition[    148389,       3413]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "=="}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"CLEAN", " ", "WHAT"}], "-", 
+       RowBox[{"IF", " ", "ENGINE"}], "-", "TRAIN"}], "&"}], " ", "BUS", " ", 
+     "ONLY"}], "-", 
+    RowBox[{"NO", " ", "SYNTAX", " ", "ERRORS"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "=="}], "*)"}], "\[IndentingNewLine]", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"===", "===", "===", "===", "===", "===", 
+    RowBox[{"==", 
+     RowBox[{"PROBLEM", " ", "LIBRARY", " ", 
+      RowBox[{"(", 
+       RowBox[{"2", " ", "PROBLEMS"}], ")"}]}]}], "===", "===", "===", "===", 
+    "===", "===", "=="}], "*)"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"problemLibrary", "=", 
+    RowBox[{"<|", 
+     RowBox[{
+      RowBox[{"\"\<Mumbai Train Expansion\>\"", "->", 
+       RowBox[{"<|", 
+        RowBox[{
+         RowBox[{"\"\<Statement\>\"", 
+          "->", "\"\<What if Mumbai increases train frequency by 20%?\>\""}], 
+         ",", 
+         RowBox[{"\"\<Context\>\"", 
+          "->", "\"\<Mumbai local trains carry 7.5 million passengers daily \
+across 3 lines\>\""}], ",", 
+         RowBox[{"\"\<Goal\>\"", 
+          "->", "\"\<Reduce overcrowding and improve passenger \
+experience\>\""}], ",", 
+         RowBox[{"\"\<Constraint\>\"", 
+          "->", "\"\<Limited station platform capacity and infrastructure \
+bottlenecks\>\""}], ",", 
+         RowBox[{"\"\<Timeframe\>\"", 
+          "->", "\"\<5 year phased rollout with behavioral adoption \
+lag\>\""}], ",", 
+         RowBox[{"\"\<BaseCap\>\"", "->", "64000"}], ",", 
+         RowBox[{"\"\<Unit\>\"", "->", "\"\<passengers/hour\>\""}], ",", 
+         RowBox[{"\"\<Icon\>\"", "->", "\"\<\|01f686\>\""}], ",", 
+         RowBox[{"\"\<Color\>\"", "->", "Blue"}], ",", 
+         RowBox[{"\"\<VisualizationType\>\"", "->", "\"\<Train\>\""}], ",", 
+         RowBox[{"\"\<Parameters\>\"", "->", 
+          RowBox[{"<|", 
+           RowBox[{
+            RowBox[{"\"\<Primary\>\"", "->", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<Label\>\"", "->", "\"\<Frequency Increase\>\""}], 
+               ",", 
+               RowBox[{"\"\<Default\>\"", "->", "0.20"}], ",", 
+               RowBox[{"\"\<Range\>\"", "->", 
+                RowBox[{"{", 
+                 RowBox[{"0.05", ",", "0.50"}], "}"}]}], ",", 
+               RowBox[{"\"\<Icon\>\"", "->", "\"\<\|01f686\>\""}]}], "|>"}]}],
+             ",", 
+            RowBox[{"\"\<Secondary\>\"", "->", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<Label\>\"", "->", "\"\<Mode Shift\>\""}], ",", 
+               RowBox[{"\"\<Default\>\"", "->", "0.15"}], ",", 
+               RowBox[{"\"\<Range\>\"", "->", 
+                RowBox[{"{", 
+                 RowBox[{"0.05", ",", "0.35"}], "}"}]}], ",", 
+               RowBox[{"\"\<Icon\>\"", "->", "\"\<\[UnknownGlyph]\>\""}]}], 
+              "|>"}]}], ",", 
+            RowBox[{"\"\<Tolerance\>\"", "->", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<Label\>\"", "->", "\"\<Crowding Tolerance\>\""}], 
+               ",", 
+               RowBox[{"\"\<Default\>\"", "->", "1.6"}], ",", 
+               RowBox[{"\"\<Range\>\"", "->", 
+                RowBox[{"{", 
+                 RowBox[{"1.2", ",", "2.2"}], "}"}]}], ",", 
+               RowBox[{"\"\<Icon\>\"", "->", "\"\<\|01f465\>\""}]}], "|>"}]}],
+             ",", 
+            RowBox[{"\"\<Lag\>\"", "->", 
+             RowBox[{"<|", 
+              RowBox[{
+               
+               RowBox[{"\"\<Label\>\"", 
+                "->", "\"\<Behavior Lag (years)\>\""}], ",", 
+               RowBox[{"\"\<Default\>\"", "->", "1.5"}], ",", 
+               RowBox[{"\"\<Range\>\"", "->", 
+                RowBox[{"{", 
+                 RowBox[{"0.5", ",", "3.0"}], "}"}]}], ",", 
+               RowBox[{"\"\<Icon\>\"", "->", "\"\<\:23f3\>\""}]}], "|>"}]}], ",", 
+            RowBox[{"\"\<Bottleneck\>\"", "->", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<Label\>\"", "->", "\"\<Station Capacity %\>\""}], 
+               ",", 
+               RowBox[{"\"\<Default\>\"", "->", "0.85"}], ",", 
+               RowBox[{"\"\<Range\>\"", "->", 
+                RowBox[{"{", 
+                 RowBox[{"0.60", ",", "1.0"}], "}"}]}], ",", 
+               RowBox[{"\"\<Icon\>\"", "->", "\"\<\|01f3e2\>\""}]}], 
+              "|>"}]}]}], "|>"}]}], ",", 
+         RowBox[{"\"\<Assumptions\>\"", "->", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<Frequency Increase\>\"", 
+              ",", "\"\<Train frequency boost (20% = 6 to 7.2 \
+trains/hr)\>\""}], "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<Mode Shift\>\"", 
+              ",", "\"\<Fraction of commuters switching from other modes to \
+trains\>\""}], "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<Crowding Tolerance\>\"", 
+              ",", "\"\<Acceptable passengers/train vs design capacity\>\""}],
+              "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<Behavior Lag\>\"", 
+              ",", "\"\<Years for commuters to change habits\>\""}], "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<Station Bottleneck\>\"", 
+              ",", "\"\<Station capacity as fraction of train capacity\>\""}],
+              "}"}]}], "}"}]}], ",", 
+         RowBox[{"\"\<ComputationalLogic\>\"", "->", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<Vague Question\>\"", 
+              ",", "\"\<Mathematical Model\>\""}], "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<'Will people switch?'\>\"", 
+              ",", "\"\<ModeShift \[Times] Demand \[Times] (1 - \
+e^(-Year/Lag))\>\""}], "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<'Can stations handle it?'\>\"", 
+              ",", "\"\<EffectiveCap = Min(TrainCap, StationCap \[Times] \
+Limit)\>\""}], "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<'When collapse?'\>\"", 
+              ",", "\"\<If(Stranded > 15,000, 'Critical', 'Safe')\>\""}], 
+             "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<'How fast to build?'\>\"", 
+              ",", "\"\<Linear: t/5 | Aggressive: 80% by Y2\>\""}], "}"}]}], 
+           "}"}]}]}], "|>"}]}], ",", 
+      RowBox[{"\"\<Public Transit Bus Fleet\>\"", "->", 
+       RowBox[{"<|", 
+        RowBox[{
+         RowBox[{"\"\<Statement\>\"", 
+          "->", "\"\<What if city adds 40% more buses?\>\""}], ",", 
+         RowBox[{"\"\<Context\>\"", 
+          "->", "\"\<City transit operates 500 buses serving 1 million daily \
+riders\>\""}], ",", 
+         RowBox[{"\"\<Goal\>\"", 
+          "->", "\"\<Reduce wait times and increase route coverage\>\""}], ",", 
+         RowBox[{"\"\<Constraint\>\"", 
+          "->", "\"\<Limited bus depots and maintenance facilities\>\""}], ",", 
+         RowBox[{"\"\<Timeframe\>\"", 
+          "->", "\"\<5 year fleet expansion with infrastructure \
+upgrades\>\""}], ",", 
+         RowBox[{"\"\<BaseCap\>\"", "->", "500"}], ",", 
+         RowBox[{"\"\<Unit\>\"", "->", "\"\<buses\>\""}], ",", 
+         RowBox[{"\"\<Icon\>\"", "->", "\"\<\|01f68c\>\""}], ",", 
+         RowBox[{"\"\<Color\>\"", "->", "Orange"}], ",", 
+         RowBox[{"\"\<VisualizationType\>\"", "->", "\"\<Bus\>\""}], ",", 
+         RowBox[{"\"\<Parameters\>\"", "->", 
+          RowBox[{"<|", 
+           RowBox[{
+            RowBox[{"\"\<Primary\>\"", "->", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<Label\>\"", "->", "\"\<Fleet Increase\>\""}], ",", 
+               RowBox[{"\"\<Default\>\"", "->", "0.40"}], ",", 
+               RowBox[{"\"\<Range\>\"", "->", 
+                RowBox[{"{", 
+                 RowBox[{"0.15", ",", "0.70"}], "}"}]}], ",", 
+               RowBox[{"\"\<Icon\>\"", "->", "\"\<\|01f68c\>\""}]}], "|>"}]}],
+             ",", 
+            RowBox[{"\"\<Secondary\>\"", "->", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<Label\>\"", "->", "\"\<Mode Shift\>\""}], ",", 
+               RowBox[{"\"\<Default\>\"", "->", "0.25"}], ",", 
+               RowBox[{"\"\<Range\>\"", "->", 
+                RowBox[{"{", 
+                 RowBox[{"0.10", ",", "0.45"}], "}"}]}], ",", 
+               RowBox[{"\"\<Icon\>\"", "->", "\"\<\[UnknownGlyph]\>\""}]}], 
+              "|>"}]}], ",", 
+            RowBox[{"\"\<Tolerance\>\"", "->", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<Label\>\"", "->", "\"\<Bus Capacity Factor\>\""}],
+                ",", 
+               RowBox[{"\"\<Default\>\"", "->", "1.4"}], ",", 
+               RowBox[{"\"\<Range\>\"", "->", 
+                RowBox[{"{", 
+                 RowBox[{"1.1", ",", "1.8"}], "}"}]}], ",", 
+               RowBox[{"\"\<Icon\>\"", "->", "\"\<\|01f3ab\>\""}]}], "|>"}]}],
+             ",", 
+            RowBox[{"\"\<Lag\>\"", "->", 
+             RowBox[{"<|", 
+              RowBox[{
+               
+               RowBox[{"\"\<Label\>\"", 
+                "->", "\"\<Adoption Lag (years)\>\""}], ",", 
+               RowBox[{"\"\<Default\>\"", "->", "1.8"}], ",", 
+               RowBox[{"\"\<Range\>\"", "->", 
+                RowBox[{"{", 
+                 RowBox[{"0.5", ",", "3.5"}], "}"}]}], ",", 
+               RowBox[{"\"\<Icon\>\"", "->", "\"\<\:23f1\:fe0f\>\""}]}], 
+              "|>"}]}], ",", 
+            RowBox[{"\"\<Bottleneck\>\"", "->", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<Label\>\"", "->", "\"\<Depot Capacity %\>\""}], ",", 
+               RowBox[{"\"\<Default\>\"", "->", "0.70"}], ",", 
+               RowBox[{"\"\<Range\>\"", "->", 
+                RowBox[{"{", 
+                 RowBox[{"0.50", ",", "0.95"}], "}"}]}], ",", 
+               RowBox[{"\"\<Icon\>\"", "->", "\"\<\|01f3ed\>\""}]}], 
+              "|>"}]}]}], "|>"}]}], ",", 
+         RowBox[{"\"\<Assumptions\>\"", "->", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<Fleet Increase\>\"", 
+              ",", "\"\<Additional buses (40% = 500 to 700 buses)\>\""}], 
+             "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<Mode Shift\>\"", 
+              ",", "\"\<Fraction of commuters switching from private vehicles \
+to buses\>\""}], "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<Bus Capacity\>\"", 
+              ",", "\"\<Acceptable passengers per bus vs design \
+capacity\>\""}], "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<Adoption Lag\>\"", 
+              ",", "\"\<Years for commuters to switch to public \
+transit\>\""}], "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<Depot Capacity\>\"", 
+              ",", "\"\<Depot and maintenance capacity vs fleet size\>\""}], 
+             "}"}]}], "}"}]}], ",", 
+         RowBox[{"\"\<ComputationalLogic\>\"", "->", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<Vague Question\>\"", 
+              ",", "\"\<Mathematical Model\>\""}], "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<'Will people use buses?'\>\"", 
+              ",", "\"\<ModeShift \[Times] BaseDemand \[Times] (1 - \
+e^(-Year/Lag))\>\""}], "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<'Can depots handle it?'\>\"", 
+              ",", "\"\<OperationalFleet = Min(TotalBuses, \
+DepotCapacity)\>\""}], "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<'When is it overcrowded?'\>\"", 
+              ",", "\"\<If(Passengers/Bus > Capacity, 'Crowded', 'OK')\>\""}],
+              "}"}], ",", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<'How to expand fleet?'\>\"", 
+              ",", "\"\<Coordinate bus purchase with depot expansion\>\""}], 
+             "}"}]}], "}"}]}]}], "|>"}]}]}], "|>"}]}], ";"}], 
+  "\[IndentingNewLine]", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"===", "===", "===", "===", "===", "===", 
+    RowBox[{"==", 
+     RowBox[{"COMPUTATIONAL", " ", "CORE"}]}], "===", "===", "===", "===", "===",
+     "===", "=="}], "*)"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"GetCapacityFactor", "[", 
+     RowBox[{"year_", ",", "target_", ",", "strategy_"}], "]"}], ":=", 
+    RowBox[{"Switch", "[", 
+     RowBox[{"strategy", ",", "\"\<Linear\>\"", ",", 
+      RowBox[{"target", "*", 
+       RowBox[{"(", 
+        RowBox[{"year", "/", "5.0"}], ")"}]}], ",", "\"\<Aggressive\>\"", ",", 
+      RowBox[{"target", "*", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{"year", "<", "1"}], ",", "0.5", ",", 
+         RowBox[{"year", "<", "2"}], ",", "0.8", ",", "True", ",", "1.0"}], 
+        "]"}]}], ",", "\"\<Delayed Rollout\>\"", ",", 
+      RowBox[{"target", "*", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{"year", "<", "3"}], ",", "0.1", ",", "True", ",", "1.0"}], 
+        "]"}]}], ",", "_", ",", 
+      RowBox[{"target", "*", 
+       RowBox[{"(", 
+        RowBox[{"year", "/", "5.0"}], ")"}]}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"GetWeatherImpact", "[", "condition_", "]"}], ":=", 
+    RowBox[{"Switch", "[", 
+     RowBox[{"condition", ",", "\"\<Normal\>\"", ",", 
+      RowBox[{"<|", 
+       RowBox[{
+        RowBox[{"\"\<Cap\>\"", "->", "1.0"}], ",", 
+        RowBox[{"\"\<Demand\>\"", "->", "1.0"}]}], "|>"}], 
+      ",", "\"\<Monsoon\>\"", ",", 
+      RowBox[{"<|", 
+       RowBox[{
+        RowBox[{"\"\<Cap\>\"", "->", "0.85"}], ",", 
+        RowBox[{"\"\<Demand\>\"", "->", "0.9"}]}], "|>"}], 
+      ",", "\"\<Heatwave\>\"", ",", 
+      RowBox[{"<|", 
+       RowBox[{
+        RowBox[{"\"\<Cap\>\"", "->", "0.95"}], ",", 
+        RowBox[{"\"\<Demand\>\"", "->", "0.8"}]}], "|>"}], ",", "_", ",", 
+      RowBox[{"<|", 
+       RowBox[{
+        RowBox[{"\"\<Cap\>\"", "->", "1.0"}], ",", 
+        RowBox[{"\"\<Demand\>\"", "->", "1.0"}]}], "|>"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"GetHourlyDemand", "[", "hour_", "]"}], ":=", 
+    RowBox[{"Which", "[", 
+     RowBox[{
+      RowBox[{"7", "<=", "hour", "<=", "10"}], ",", "2.2", ",", 
+      RowBox[{"17", "<=", "hour", "<=", "21"}], ",", "2.1", ",", 
+      RowBox[{"10", "<", "hour", "<", "17"}], ",", "0.6", ",", "True", ",", 
+      "0.3"}], "]"}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"ComputeSystemState", "[", 
+     RowBox[{
+     "year_", ",", "hour_", ",", "primary_", ",", "strategy_", ",", 
+      "secondary_", ",", "tolerance_", ",", "lag_", ",", "bottleneck_", ",", 
+      "weather_", ",", "baseCap_"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "weatherFacts", ",", "capacityInc", ",", "currentCap", ",", 
+        "baseDemand", ",", "shiftDemand", ",", "adoptionRate", ",", 
+        "totalDemand", ",", "bottleneckCapReal", ",", "effectiveCap", ",", 
+        "utilization", ",", "overflow", ",", "unserved", ",", "efficiency", ",",
+         "stress", ",", "bottleneckActive"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"weatherFacts", "=", 
+        RowBox[{"GetWeatherImpact", "[", "weather", "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"capacityInc", "=", 
+        RowBox[{"GetCapacityFactor", "[", 
+         RowBox[{"year", ",", "primary", ",", "strategy"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"currentCap", "=", 
+        RowBox[{"baseCap", "*", 
+         RowBox[{"(", 
+          RowBox[{"1", "+", "capacityInc"}], ")"}], "*", 
+         RowBox[{"weatherFacts", "[", "\"\<Cap\>\"", "]"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"baseDemand", "=", 
+        RowBox[{"baseCap", "*", 
+         RowBox[{"GetHourlyDemand", "[", "hour", "]"}], "*", 
+         RowBox[{"weatherFacts", "[", "\"\<Demand\>\"", "]"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"adoptionRate", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"lag", ">", "0"}], ",", 
+          RowBox[{"1", "-", 
+           RowBox[{"Exp", "[", 
+            RowBox[{
+             RowBox[{"-", "year"}], "/", "lag"}], "]"}]}], ",", "1.0"}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"shiftDemand", "=", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"secondary", "*", "baseDemand"}], ")"}], "*", 
+         "adoptionRate"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"totalDemand", "=", 
+        RowBox[{"baseDemand", "+", "shiftDemand"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"bottleneckCapReal", "=", 
+        RowBox[{"currentCap", "*", "bottleneck"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"effectiveCap", "=", 
+        RowBox[{"Min", "[", 
+         RowBox[{"currentCap", ",", "bottleneckCapReal"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"bottleneckActive", "=", 
+        RowBox[{"bottleneckCapReal", "<", "currentCap"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"utilization", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"effectiveCap", ">", "0"}], ",", 
+          RowBox[{"totalDemand", "/", "effectiveCap"}], ",", "10.0"}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"efficiency", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"totalDemand", ">", "0"}], ",", 
+          RowBox[{"Min", "[", 
+           RowBox[{"1.0", ",", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"effectiveCap", "*", "tolerance"}], ")"}], "/", 
+             "totalDemand"}]}], "]"}], ",", "1.0"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"overflow", "=", 
+        RowBox[{"Max", "[", 
+         RowBox[{"0", ",", 
+          RowBox[{"totalDemand", "-", 
+           RowBox[{"(", 
+            RowBox[{"effectiveCap", "*", "tolerance"}], ")"}]}]}], "]"}]}], ";",
+        "\[IndentingNewLine]", 
+       RowBox[{"unserved", "=", 
+        RowBox[{"Max", "[", 
+         RowBox[{"0", ",", 
+          RowBox[{"totalDemand", "-", 
+           RowBox[{"effectiveCap", "*", "1.8"}]}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"stress", "=", 
+        RowBox[{"Which", "[", 
+         RowBox[{
+          RowBox[{"unserved", ">", 
+           RowBox[{"baseCap", "*", "0.23"}]}], ",", "\"\<Critical\>\"", ",", 
+          RowBox[{"utilization", ">", "tolerance"}], ",", "\"\<Strained\>\"", 
+          ",", "True", ",", "\"\<Safe\>\""}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"<|", 
+        RowBox[{
+         RowBox[{"\"\<Year\>\"", "->", 
+          RowBox[{"N", "[", "year", "]"}]}], ",", 
+         RowBox[{"\"\<Hour\>\"", "->", "hour"}], ",", 
+         RowBox[{"\"\<Demand\>\"", "->", 
+          RowBox[{"Round", "[", "totalDemand", "]"}]}], ",", 
+         RowBox[{"\"\<Capacity\>\"", "->", 
+          RowBox[{"Round", "[", "effectiveCap", "]"}]}], ",", 
+         RowBox[{"\"\<Utilization\>\"", "->", 
+          RowBox[{"N", "[", "utilization", "]"}]}], ",", 
+         RowBox[{"\"\<Overflow\>\"", "->", 
+          RowBox[{"Round", "[", "overflow", "]"}]}], ",", 
+         RowBox[{"\"\<Unserved\>\"", "->", 
+          RowBox[{"Round", "[", "unserved", "]"}]}], ",", 
+         RowBox[{"\"\<Stress\>\"", "->", "stress"}], ",", 
+         RowBox[{"\"\<RawCapacity\>\"", "->", 
+          RowBox[{"Round", "[", "currentCap", "]"}]}], ",", 
+         RowBox[{"\"\<BottleneckCap\>\"", "->", 
+          RowBox[{"Round", "[", "bottleneckCapReal", "]"}]}], ",", 
+         RowBox[{"\"\<Adoption\>\"", "->", 
+          RowBox[{"N", "[", "adoptionRate", "]"}]}], ",", 
+         RowBox[{"\"\<Strategy\>\"", "->", "strategy"}], ",", 
+         RowBox[{"\"\<Efficiency\>\"", "->", 
+          RowBox[{"N", "[", "efficiency", "]"}]}], ",", 
+         RowBox[{"\"\<BottleneckActive\>\"", "->", "bottleneckActive"}]}], 
+        "|>"}]}]}], "]"}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"ComputeDay", "[", 
+     RowBox[{
+     "year_", ",", "primary_", ",", "strategy_", ",", "secondary_", ",", 
+      "tolerance_", ",", "lag_", ",", "bottleneck_", ",", "weather_", ",", 
+      "baseCap_"}], "]"}], ":=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"ComputeSystemState", "[", 
+       RowBox[{
+       "year", ",", "h", ",", "primary", ",", "strategy", ",", "secondary", ",",
+         "tolerance", ",", "lag", ",", "bottleneck", ",", "weather", ",", 
+        "baseCap"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"h", ",", "6", ",", "22"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"===", "===", "===", "===", "===", "===", 
+    RowBox[{"==", 
+     RowBox[{"CLEAN", " ", "VISUALIZATIONS"}]}], "===", "===", "===", "===", "===",
+     "===", "=="}], "*)"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DrawVisualization", "[", 
+     RowBox[{"type_", ",", "utilization_", ",", "limit_"}], "]"}], ":=", 
+    RowBox[{"Switch", "[", 
+     RowBox[{"type", ",", "\"\<Train\>\"", ",", 
+      RowBox[{"Graphics", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Brown", ",", 
+            RowBox[{"Thickness", "[", "0.015", "]"}], ",", 
+            RowBox[{"Line", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0", ",", "0"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"10", ",", "0"}], "}"}]}], "}"}], "]"}]}], "}"}], ",", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Darker", "[", "Gray", "]"}], ",", 
+              RowBox[{"Rectangle", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"-", "0.1"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"i", "+", "0.3"}], ",", "0"}], "}"}]}], "]"}]}], 
+             "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "0", ",", "10", ",", "0.8"}], "}"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"EdgeForm", "[", 
+             RowBox[{"{", 
+              RowBox[{"Thick", ",", "Black"}], "}"}], "]"}], ",", 
+            RowBox[{"Which", "[", 
+             RowBox[{
+              RowBox[{"utilization", ">", "limit"}], ",", 
+              RowBox[{"FaceForm", "[", 
+               RowBox[{"Lighter", "[", 
+                RowBox[{"Red", ",", "0.5"}], "]"}], "]"}], ",", 
+              RowBox[{"utilization", ">", "1.0"}], ",", 
+              RowBox[{"FaceForm", "[", 
+               RowBox[{"Lighter", "[", 
+                RowBox[{"Orange", ",", "0.5"}], "]"}], "]"}], ",", "True", ",", 
+              RowBox[{"FaceForm", "[", 
+               RowBox[{"Lighter", "[", 
+                RowBox[{"Green", ",", "0.5"}], "]"}], "]"}]}], "]"}], ",", 
+            RowBox[{"Rectangle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0.2"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"10", ",", "3"}], "}"}], ",", 
+              RowBox[{"RoundingRadius", "->", "0.5"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"FaceForm", "[", 
+               RowBox[{"Lighter", "[", 
+                RowBox[{"Blue", ",", "0.8"}], "]"}], "]"}], ",", 
+              RowBox[{"Rectangle", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "1.5"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"i", "+", "1.5"}], ",", "2.5"}], "}"}]}], "]"}]}], 
+             "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "0.5", ",", "8", ",", "2"}], "}"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Darker", "[", "Gray", "]"}], ",", 
+            RowBox[{"Rectangle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"4.5", ",", "0.3"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"5.5", ",", "2.8"}], "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Which", "[", 
+             RowBox[{
+              RowBox[{"utilization", ">", "limit"}], ",", "Red", ",", 
+              RowBox[{"utilization", ">", "1.0"}], ",", "Orange", ",", "True",
+               ",", "Green"}], "]"}], ",", 
+            RowBox[{"Opacity", "[", "0.6", "]"}], ",", 
+            RowBox[{"Rectangle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0.2"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"Min", "[", 
+                 RowBox[{"10", ",", 
+                  RowBox[{"10", "*", 
+                   RowBox[{"(", 
+                    RowBox[{"utilization", "/", "2.0"}], ")"}]}]}], "]"}], ",",
+                 "1.2"}], "}"}], ",", 
+              RowBox[{"RoundingRadius", "->", "0.1"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"Black", ",", 
+              RowBox[{"Disk", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "0"}], "}"}], ",", "0.3"}], "]"}], ",", 
+              "Gray", ",", 
+              RowBox[{"Disk", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "0"}], "}"}], ",", "0.15"}], "]"}]}], 
+             "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "1", ",", "9", ",", "4"}], "}"}]}], "]"}], ",", 
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"ToString", "[", 
+                RowBox[{"Round", "[", 
+                 RowBox[{"utilization", "*", "100"}], "]"}], "]"}], 
+               "<>", "\"\<% Load\>\""}], ",", "14", ",", "Bold"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"5", ",", 
+              RowBox[{"-", "0.75"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+        RowBox[{"ImageSize", "->", 
+         RowBox[{"{", 
+          RowBox[{"400", ",", "130"}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "->", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "0.5"}], ",", "10.5"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "1.5"}], ",", "3.5"}], "}"}]}], "}"}]}], ",", 
+        RowBox[{"Background", "->", 
+         RowBox[{"Lighter", "[", 
+          RowBox[{"Gray", ",", "0.95"}], "]"}]}]}], "]"}], ",", "\"\<Bus\>\"",
+       ",", 
+      RowBox[{"Graphics", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"EdgeForm", "[", 
+             RowBox[{"{", 
+              RowBox[{"Thick", ",", "Black"}], "}"}], "]"}], ",", 
+            RowBox[{"Which", "[", 
+             RowBox[{
+              RowBox[{"utilization", ">", "limit"}], ",", 
+              RowBox[{"FaceForm", "[", 
+               RowBox[{"Lighter", "[", 
+                RowBox[{"Red", ",", "0.5"}], "]"}], "]"}], ",", 
+              RowBox[{"utilization", ">", "1.0"}], ",", 
+              RowBox[{"FaceForm", "[", 
+               RowBox[{"Lighter", "[", 
+                RowBox[{"Orange", ",", "0.5"}], "]"}], "]"}], ",", "True", ",", 
+              RowBox[{"FaceForm", "[", 
+               RowBox[{"Lighter", "[", 
+                RowBox[{"Orange", ",", "0.7"}], "]"}], "]"}]}], "]"}], ",", 
+            RowBox[{"Rectangle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0.5"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"10", ",", "3"}], "}"}], ",", 
+              RowBox[{"RoundingRadius", "->", "0.4"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"FaceForm", "[", 
+               RowBox[{"Lighter", "[", 
+                RowBox[{"Blue", ",", "0.8"}], "]"}], "]"}], ",", 
+              RowBox[{"Rectangle", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "1.5"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"i", "+", "1.2"}], ",", "2.5"}], "}"}]}], "]"}]}], 
+             "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "0.5", ",", "8.5", ",", "1.5"}], "}"}]}], 
+           "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Yellow", ",", 
+            RowBox[{"Rectangle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0.3", ",", "2.5"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"1.5", ",", "2.8"}], "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Yellow", ",", 
+            RowBox[{"Rectangle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"8.5", ",", "2.5"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"9.7", ",", "2.8"}], "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"Black", ",", 
+              RowBox[{"Disk", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "0.5"}], "}"}], ",", "0.4"}], "]"}], ",", 
+              "Gray", ",", 
+              RowBox[{"Disk", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "0.5"}], "}"}], ",", "0.2"}], "]"}]}], 
+             "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "1.5", ",", "8.5", ",", "3.5"}], "}"}]}], 
+           "]"}], ",", 
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"ToString", "[", 
+                RowBox[{"Round", "[", 
+                 RowBox[{"utilization", "*", "100"}], "]"}], "]"}], 
+               "<>", "\"\<% Full\>\""}], ",", "14", ",", "Bold"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"5", ",", 
+              RowBox[{"-", "0.5"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+        RowBox[{"ImageSize", "->", 
+         RowBox[{"{", 
+          RowBox[{"400", ",", "130"}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "->", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "0.5"}], ",", "10.5"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "1"}], ",", "3.5"}], "}"}]}], "}"}]}], ",", 
+        RowBox[{"Background", "->", 
+         RowBox[{"Lighter", "[", 
+          RowBox[{"Gray", ",", "0.95"}], "]"}]}]}], "]"}], ",", "_", ",", 
+      RowBox[{"Graphics", "[", 
+       RowBox[{
+        RowBox[{"Text", "[", 
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Visualization\>\"", ",", "16", ",", "Bold"}], "]"}], 
+         "]"}], ",", 
+        RowBox[{"ImageSize", "->", 
+         RowBox[{"{", 
+          RowBox[{"400", ",", "130"}], "}"}]}]}], "]"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DrawGauge", "[", 
+     RowBox[{"efficiency_", ",", "stress_"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"color", ",", "angle"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"color", "=", 
+        RowBox[{"Switch", "[", 
+         RowBox[{
+         "stress", ",", "\"\<Critical\>\"", ",", "Red", 
+          ",", "\"\<Strained\>\"", ",", "Orange", ",", "_", ",", "Green"}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"angle", "=", 
+        RowBox[{"efficiency", "*", "180"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Graphics", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Lighter", "[", 
+              RowBox[{"Gray", ",", "0.85"}], "]"}], ",", 
+             RowBox[{"Thickness", "[", "0.15", "]"}], ",", 
+             RowBox[{"Circle", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0", ",", "0"}], "}"}], ",", "1", ",", 
+               RowBox[{"{", 
+                RowBox[{"0", ",", "Pi"}], "}"}]}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"color", ",", 
+             RowBox[{"Thickness", "[", "0.15", "]"}], ",", 
+             RowBox[{"Circle", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0", ",", "0"}], "}"}], ",", "1", ",", 
+               RowBox[{"{", 
+                RowBox[{"0", ",", 
+                 RowBox[{"angle", "*", "Degree"}]}], "}"}]}], "]"}]}], "}"}], 
+           ",", 
+           RowBox[{"{", 
+            RowBox[{"Black", ",", 
+             RowBox[{"Thickness", "[", "0.03", "]"}], ",", 
+             RowBox[{"Line", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "0"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"0.8", "*", 
+                   RowBox[{"Cos", "[", 
+                    RowBox[{"angle", "*", "Degree"}], "]"}]}], ",", 
+                  RowBox[{"0.8", "*", 
+                   RowBox[{"Sin", "[", 
+                    RowBox[{"angle", "*", "Degree"}], "]"}]}]}], "}"}]}], 
+               "}"}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"color", ",", 
+             RowBox[{"Disk", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0", ",", "0"}], "}"}], ",", "0.12"}], "]"}]}], "}"}],
+            ",", 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\<0%\>\"", ",", "10", ",", "Bold"}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "1.2"}], ",", "0"}], "}"}]}], "]"}], ",", 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\<100%\>\"", ",", "10", ",", "Bold"}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"1.2", ",", "0"}], "}"}]}], "]"}], ",", 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\<Efficiency\>\"", ",", "12", ",", "Bold"}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", 
+               RowBox[{"-", "0.5"}]}], "}"}]}], "]"}], ",", 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"ToString", "[", 
+                 RowBox[{"Round", "[", 
+                  RowBox[{"efficiency", "*", "100"}], "]"}], "]"}], 
+                "<>", "\"\<%\>\""}], ",", "18", ",", "Bold", ",", "color"}], 
+              "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "0.6"}], "}"}]}], "]"}]}], "}"}], ",", 
+         RowBox[{"ImageSize", "->", 
+          RowBox[{"{", 
+           RowBox[{"220", ",", "130"}], "}"}]}], ",", 
+         RowBox[{"PlotRange", "->", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "1.5"}], ",", "1.5"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "0.7"}], ",", "1.4"}], "}"}]}], "}"}]}]}], 
+        "]"}]}]}], "]"}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DrawRadial", "[", 
+     RowBox[{"adoption_", ",", "year_"}], "]"}], ":=", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Lighter", "[", 
+           RowBox[{"Gray", ",", "0.9"}], "]"}], ",", 
+          RowBox[{"Thickness", "[", "0.12", "]"}], ",", 
+          RowBox[{"Circle", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", "1"}], "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Blend", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"Blue", ",", "Purple"}], "}"}], ",", "adoption"}], "]"}],
+           ",", 
+          RowBox[{"Thickness", "[", "0.12", "]"}], ",", 
+          RowBox[{"Circle", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", "1", ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Pi", "/", "2"}], ",", 
+              RowBox[{
+               RowBox[{"Pi", "/", "2"}], "-", 
+               RowBox[{"2", "*", "Pi", "*", "adoption"}]}]}], "}"}]}], 
+           "]"}]}], "}"}], ",", 
+        RowBox[{"Text", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"ToString", "[", 
+              RowBox[{"Round", "[", 
+               RowBox[{"adoption", "*", "100"}], "]"}], "]"}], 
+             "<>", "\"\<%\>\""}], ",", "22", ",", "Bold", ",", "Purple"}], 
+           "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0.25"}], "}"}]}], "]"}], ",", 
+        RowBox[{"Text", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<Adoption\>\"", ",", "11", ",", "Gray"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", 
+            RowBox[{"-", "0.25"}]}], "}"}]}], "]"}], ",", 
+        RowBox[{"Text", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{
+            RowBox[{"\"\<Year \>\"", "<>", 
+             RowBox[{"ToString", "[", 
+              RowBox[{"Round", "[", 
+               RowBox[{"year", ",", "0.1"}], "]"}], "]"}]}], ",", "10", ",", 
+            "Bold"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", 
+            RowBox[{"-", "0.65"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+      RowBox[{"ImageSize", "->", 
+       RowBox[{"{", 
+        RowBox[{"160", ",", "160"}], "}"}]}], ",", 
+      RowBox[{"PlotRange", "->", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "1.4"}], ",", "1.4"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "1.4"}], ",", "1.4"}], "}"}]}], "}"}]}]}], "]"}]}], ";"}]\
+, "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DrawWeather", "[", "condition_", "]"}], ":=", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{
+      RowBox[{"Switch", "[", 
+       RowBox[{"condition", ",", "\"\<Normal\>\"", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Yellow", ",", 
+            RowBox[{"Disk", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0"}], "}"}], ",", "0.4"}], "]"}]}], "}"}], ",", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"Yellow", ",", 
+              RowBox[{"Thickness", "[", "0.05", "]"}], ",", 
+              RowBox[{"Line", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"0.6", "*", 
+                    RowBox[{"Cos", "[", "a", "]"}]}], ",", 
+                   RowBox[{"0.6", "*", 
+                    RowBox[{"Sin", "[", "a", "]"}]}]}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"0.9", "*", 
+                    RowBox[{"Cos", "[", "a", "]"}]}], ",", 
+                   RowBox[{"0.9", "*", 
+                    RowBox[{"Sin", "[", "a", "]"}]}]}], "}"}]}], "}"}], 
+               "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"a", ",", "0", ",", 
+              RowBox[{"2", "*", "Pi"}], ",", 
+              RowBox[{"Pi", "/", "6"}]}], "}"}]}], "]"}]}], "}"}], 
+        ",", "\"\<Monsoon\>\"", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Gray", ",", 
+            RowBox[{"Disk", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"-", "0.2"}], ",", "0.3"}], "}"}], ",", "0.4"}], 
+             "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Darker", "[", "Gray", "]"}], ",", 
+            RowBox[{"Disk", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0.2", ",", "0.3"}], "}"}], ",", "0.35"}], "]"}]}], 
+           "}"}], ",", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"Blue", ",", 
+              RowBox[{"Thickness", "[", "0.04", "]"}], ",", 
+              RowBox[{"Line", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"i", "*", "0.3"}], "-", "0.6"}], ",", 
+                   RowBox[{"-", "0.2"}]}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"i", "*", "0.3"}], "-", "0.7"}], ",", 
+                   RowBox[{"-", "0.6"}]}], "}"}]}], "}"}], "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "0", ",", "4"}], "}"}]}], "]"}]}], "}"}], 
+        ",", "\"\<Heatwave\>\"", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Orange", ",", 
+            RowBox[{"Disk", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0"}], "}"}], ",", "0.5"}], "]"}]}], "}"}], ",", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"Red", ",", 
+              RowBox[{"Thickness", "[", "0.06", "]"}], ",", 
+              RowBox[{"Line", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"0.7", "*", 
+                    RowBox[{"Cos", "[", "a", "]"}]}], ",", 
+                   RowBox[{"0.7", "*", 
+                    RowBox[{"Sin", "[", "a", "]"}]}]}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"1.0", "*", 
+                    RowBox[{"Cos", "[", "a", "]"}]}], ",", 
+                   RowBox[{"1.0", "*", 
+                    RowBox[{"Sin", "[", "a", "]"}]}]}], "}"}]}], "}"}], 
+               "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"a", ",", "0", ",", 
+              RowBox[{"2", "*", "Pi"}], ",", 
+              RowBox[{"Pi", "/", "4"}]}], "}"}]}], "]"}]}], "}"}], ",", "_", ",", 
+        RowBox[{"{", "}"}]}], "]"}], ",", 
+      RowBox[{"ImageSize", "->", 
+       RowBox[{"{", 
+        RowBox[{"70", ",", "70"}], "}"}]}], ",", 
+      RowBox[{"PlotRange", "->", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "1.2"}], ",", "1.2"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "1.2"}], ",", "1.2"}], "}"}]}], "}"}]}]}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DrawTimeline", "[", 
+     RowBox[{"strategy_", ",", "currentYear_"}], "]"}], ":=", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Lighter", "[", 
+           RowBox[{"Gray", ",", "0.85"}], "]"}], ",", 
+          RowBox[{"Rectangle", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"5", ",", "0.5"}], "}"}], ",", 
+            RowBox[{"RoundingRadius", "->", "0.15"}]}], "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Blend", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"Green", ",", "Blue"}], "}"}], ",", 
+            RowBox[{"currentYear", "/", "5"}]}], "]"}], ",", 
+          RowBox[{"Rectangle", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"currentYear", ",", "0.5"}], "}"}], ",", 
+            RowBox[{"RoundingRadius", "->", "0.15"}]}], "]"}]}], "}"}], ",", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"White", ",", 
+            RowBox[{"Disk", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"i", ",", "0.25"}], "}"}], ",", "0.18"}], "]"}], ",", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"i", "<=", "currentYear"}], ",", "Green", ",", "Gray"}],
+              "]"}], ",", 
+            RowBox[{"Disk", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"i", ",", "0.25"}], "}"}], ",", "0.12"}], "]"}], ",", 
+            "Black", ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"\"\<Y\>\"", "<>", 
+                 RowBox[{"ToString", "[", "i", "]"}]}], ",", "8", ",", 
+                "Bold"}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", 
+                RowBox[{"-", "0.35"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "0", ",", "5"}], "}"}]}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Red", ",", 
+          RowBox[{"Polygon", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"currentYear", "-", "0.12"}], ",", "0.75"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"currentYear", "+", "0.12"}], ",", "0.75"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"currentYear", ",", "0.95"}], "}"}]}], "}"}], "]"}]}], 
+         "}"}], ",", 
+        RowBox[{"Text", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{"strategy", ",", "12", ",", "Bold"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"2.5", ",", "1.3"}], "}"}]}], "]"}]}], "}"}], ",", 
+      RowBox[{"ImageSize", "->", 
+       RowBox[{"{", 
+        RowBox[{"320", ",", "70"}], "}"}]}], ",", 
+      RowBox[{"PlotRange", "->", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "0.5"}], ",", "5.5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "0.6"}], ",", "1.5"}], "}"}]}], "}"}]}]}], "]"}]}], 
+   ";"}], "\n", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"FIXED", " ", "DrawCard"}], "-", 
+    RowBox[{
+    "Units", " ", "displayed", " ", "on", " ", "separate", " ", "line"}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DrawCard", "[", 
+     RowBox[{"label_", ",", "value_", ",", "color_", ",", 
+      RowBox[{"icon_", ":", "\"\<\>\""}]}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"valStr", ",", "unitStr", ",", "parts"}], "}"}], ",", 
+      RowBox[{"(*", 
+       RowBox[{
+       "Split", " ", "value", " ", "and", " ", "unit", " ", "if", " ", "both",
+         " ", "are", " ", "present"}], "*)"}], 
+      RowBox[{
+       RowBox[{"valStr", "=", 
+        RowBox[{"ToString", "[", "value", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"parts", "=", 
+        RowBox[{"StringSplit", "[", 
+         RowBox[{"valStr", ",", "\"\< \>\"", ",", "2"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Panel", "[", 
+        RowBox[{
+         RowBox[{"Column", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Row", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"icon", "!=", "\"\<\>\""}], ",", 
+                  RowBox[{"Style", "[", 
+                   RowBox[{"icon", ",", "14"}], "]"}], ",", "Nothing"}], 
+                 "]"}], ",", 
+                RowBox[{"Spacer", "[", "5", "]"}], ",", 
+                RowBox[{"Style", "[", 
+                 RowBox[{"label", ",", "9", ",", "Bold", ",", "Gray"}], 
+                 "]"}]}], "}"}], "]"}], ",", 
+             RowBox[{"Spacer", "[", "3", "]"}], ",", 
+             RowBox[{"(*", 
+              RowBox[{"The", " ", "numeric", " ", "value"}], "*)"}], 
+             RowBox[{"Style", "[", 
+              RowBox[{
+               RowBox[{"parts", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], ",", "18", ",", "Bold", ",", 
+               "color"}], "]"}], ",", 
+             RowBox[{"(*", 
+              RowBox[{
+              "The", " ", "unit", " ", "on", " ", "a", " ", "separate", " ", 
+               "line", " ", "if", " ", "present"}], "*)"}], 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Length", "[", "parts", "]"}], ">", "1"}], ",", 
+               RowBox[{"Style", "[", 
+                RowBox[{
+                 RowBox[{"parts", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}], ",", "8", ",", "Gray"}], 
+                "]"}], ",", "Nothing"}], "]"}]}], "}"}], ",", 
+           RowBox[{"Alignment", "->", "Center"}], ",", 
+           RowBox[{"Spacing", "->", "2"}]}], "]"}], ",", 
+         RowBox[{"Background", "->", "White"}], ",", 
+         RowBox[{"FrameMargins", "->", "10"}], ",", 
+         RowBox[{"ImageSize", "->", 
+          RowBox[{"{", 
+           RowBox[{"145", ",", "85"}], "}"}]}]}], "]"}]}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DrawStatus", "[", "stress_", "]"}], ":=", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Switch", "[", 
+           RowBox[{
+           "stress", ",", "\"\<Critical\>\"", ",", "Red", 
+            ",", "\"\<Strained\>\"", ",", "Orange", ",", "_", ",", "Green"}], 
+           "]"}], ",", 
+          RowBox[{"Disk", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", "1"}], "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"White", ",", 
+          RowBox[{"Opacity", "[", "0.3", "]"}], ",", 
+          RowBox[{"Disk", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", "0.7"}], "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"White", ",", 
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{"stress", ",", "15", ",", "Bold"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}]}], "]"}]}], "}"}]}], "}"}], ",", 
+      RowBox[{"ImageSize", "->", 
+       RowBox[{"{", 
+        RowBox[{"90", ",", "90"}], "}"}]}], ",", 
+      RowBox[{"PlotRange", "->", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "1.2"}], ",", "1.2"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "1.2"}], ",", "1.2"}], "}"}]}], "}"}]}]}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DrawFlowchart", "[", 
+     RowBox[{"state_", ",", "problem_"}], "]"}], ":=", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Blend", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"Blue", ",", "Purple"}], "}"}], ",", 
+              RowBox[{"i", "/", "5"}]}], "]"}], ",", 
+            RowBox[{"Opacity", "[", "0.2", "]"}], ",", 
+            RowBox[{"Rectangle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", 
+                RowBox[{"5", "-", "i"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"8", ",", 
+                RowBox[{"5.7", "-", "i"}]}], "}"}], ",", 
+              RowBox[{"RoundingRadius", "->", "0.25"}]}], "]"}], ",", 
+            RowBox[{"Opacity", "[", "1", "]"}], ",", "Black", ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"Switch", "[", 
+                 RowBox[{"i", ",", "0", ",", 
+                  RowBox[{"\"\<Input: Hour \>\"", "<>", 
+                   RowBox[{"ToString", "[", 
+                    RowBox[{"state", "[", "\"\<Hour\>\"", "]"}], "]"}]}], ",",
+                   "1", ",", 
+                  RowBox[{"\"\<Demand: \>\"", "<>", 
+                   RowBox[{"ToString", "[", 
+                    RowBox[{"state", "[", "\"\<Demand\>\"", "]"}], "]"}], 
+                   "<>", "\"\< \>\"", "<>", 
+                   RowBox[{"problem", "[", "\"\<Unit\>\"", "]"}]}], ",", "2", 
+                  ",", 
+                  RowBox[{
+                   RowBox[{"problem", "[", "\"\<Icon\>\"", "]"}], 
+                   "<>", "\"\< Capacity: \>\"", "<>", 
+                   RowBox[{"ToString", "[", 
+                    RowBox[{"state", "[", "\"\<Capacity\>\"", "]"}], "]"}], 
+                   "<>", "\"\< \>\"", "<>", 
+                   RowBox[{"problem", "[", "\"\<Unit\>\"", "]"}]}], ",", "3", 
+                  ",", 
+                  RowBox[{"\"\<Utilization: \>\"", "<>", 
+                   RowBox[{"ToString", "[", 
+                    RowBox[{"Round", "[", 
+                    RowBox[{
+                    RowBox[{"state", "[", "\"\<Utilization\>\"", "]"}], ",", 
+                    "0.01"}], "]"}], "]"}], "<>", "\"\<x\>\""}], ",", "4", ",", 
+                  RowBox[{"\"\<Status: \>\"", "<>", 
+                   RowBox[{"state", "[", "\"\<Stress\>\"", "]"}]}]}], "]"}], ",",
+                 "11", ",", "Bold"}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"4", ",", 
+                RowBox[{"5.35", "-", "i"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "0", ",", "4"}], "}"}]}], "]"}], ",", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Darker", "[", "Gray", "]"}], ",", 
+            RowBox[{"Arrowheads", "[", "0.04", "]"}], ",", 
+            RowBox[{"Arrow", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"4", ",", 
+                 RowBox[{"4.95", "-", "i"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"4", ",", 
+                 RowBox[{"4.75", "-", "i"}]}], "}"}]}], "}"}], "]"}]}], "}"}],
+           ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "0", ",", "3"}], "}"}]}], "]"}]}], "}"}], ",", 
+      RowBox[{"ImageSize", "->", 
+       RowBox[{"{", 
+        RowBox[{"320", ",", "260"}], "}"}]}], ",", 
+      RowBox[{"PlotRange", "->", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "0.5"}], ",", "8.5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "6.2"}], "}"}]}], "}"}]}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"===", "===", "===", "===", "===", "===", 
+    RowBox[{"==", 
+     RowBox[{"MAIN", " ", "INTERFACE"}]}], "===", "===", "===", "===", "===", 
+    "===", "=="}], "*)"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"DynamicModule", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "currentState", ",", "dailyData", ",", "dailyDemands", ",", "dailyCaps",
+        ",", "dailyUnserved", ",", "yearlyData", ",", "yearlyUnserved", ",", 
+       "problemData", ",", "baseCap", ",", "params", ",", "assumptions", ",", 
+       "logic", ",", "vizType", ",", "unit", ",", "icon"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"problemData", "=", 
+       RowBox[{"problemLibrary", "[", "selectedProblem", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"baseCap", "=", 
+       RowBox[{"problemData", "[", "\"\<BaseCap\>\"", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"params", "=", 
+       RowBox[{"problemData", "[", "\"\<Parameters\>\"", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"assumptions", "=", 
+       RowBox[{"problemData", "[", "\"\<Assumptions\>\"", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"logic", "=", 
+       RowBox[{"problemData", "[", "\"\<ComputationalLogic\>\"", "]"}]}], ";",
+       "\[IndentingNewLine]", 
+      RowBox[{"vizType", "=", 
+       RowBox[{"problemData", "[", "\"\<VisualizationType\>\"", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"unit", "=", 
+       RowBox[{"problemData", "[", "\"\<Unit\>\"", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"icon", "=", 
+       RowBox[{"problemData", "[", "\"\<Icon\>\"", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"currentState", "=", 
+       RowBox[{"ComputeSystemState", "[", 
+        RowBox[{
+        "iyrb", ",", "ihour", ",", "iprimary", ",", "istrat", ",", 
+         "isecondary", ",", "itolerance", ",", "ilag", ",", "ibottleneck", ",",
+          "iweath", ",", "baseCap"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"dailyData", "=", 
+       RowBox[{"ComputeDay", "[", 
+        RowBox[{
+        "iyrb", ",", "iprimary", ",", "istrat", ",", "isecondary", ",", 
+         "itolerance", ",", "ilag", ",", "ibottleneck", ",", "iweath", ",", 
+         "baseCap"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"dailyDemands", "=", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"#", "[", "\"\<Demand\>\"", "]"}], "&"}], ",", 
+         "dailyData"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"dailyCaps", "=", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "[", "\"\<Capacity\>\"", "]"}], "*", "itolerance"}], 
+          "&"}], ",", "dailyData"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"dailyUnserved", "=", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"#", "[", "\"\<Unserved\>\"", "]"}], "&"}], ",", 
+         "dailyData"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"yearlyData", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"ComputeSystemState", "[", 
+          RowBox[{
+          "y", ",", "8", ",", "iprimary", ",", "istrat", ",", "isecondary", ",",
+            "itolerance", ",", "ilag", ",", "ibottleneck", ",", "iweath", ",",
+            "baseCap"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"y", ",", "0", ",", "5", ",", "0.5"}], "}"}]}], "]"}]}], ";",
+       "\[IndentingNewLine]", 
+      RowBox[{"yearlyUnserved", "=", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"#", "[", "\"\<Unserved\>\"", "]"}], "&"}], ",", 
+         "yearlyData"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Column", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"(*", "HEADER", "*)"}], 
+         RowBox[{
+          RowBox[{"Panel", "[", 
+           RowBox[{
+            RowBox[{"Column", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"Row", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"Style", "[", 
+                    RowBox[{"\"\<\|01f3af\>\"", ",", "35"}], "]"}], ",", 
+                   RowBox[{"Spacer", "[", "15", "]"}], ",", 
+                   RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    
+                    RowBox[{"\"\<UNIVERSAL WHAT-IF ENGINE\>\"", ",", "26", ",",
+                     "Bold", ",", "White", ",", 
+                    RowBox[{"FontFamily", "->", "\"\<Arial\>\""}]}], "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    
+                    RowBox[{"\"\<Train & Bus Transit Modeling Platform\>\"", ",",
+                     "12", ",", "Italic", ",", 
+                    RowBox[{"Lighter", "[", 
+                    RowBox[{"Blue", ",", "0.75"}], "]"}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"Spacing", "->", "3"}]}], "]"}]}], "}"}], "]"}], ",", 
+                RowBox[{"Spacer", "[", "8", "]"}], ",", 
+                RowBox[{"Row", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"DrawWeather", "[", "iweath", "]"}], ",", 
+                   RowBox[{"Spacer", "[", "12", "]"}], ",", 
+                   RowBox[{"Style", "[", 
+                    RowBox[{"iweath", ",", "13", ",", "Bold", ",", "White"}], 
+                    "]"}], ",", 
+                   RowBox[{"Spacer", "[", "40", "]"}], ",", 
+                   RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Strategy: \>\"", ",", "13", ",", "White"}], 
+                    "]"}], ",", 
+                   RowBox[{"Style", "[", 
+                    RowBox[{"istrat", ",", "13", ",", "Bold", ",", "Yellow"}],
+                     "]"}]}], "}"}], "]"}]}], "}"}], ",", 
+              RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+            RowBox[{"Background", "->", 
+             RowBox[{"Darker", "[", "Blue", "]"}]}], ",", 
+            RowBox[{"FrameMargins", "->", "18"}]}], "]"}], ",", 
+          RowBox[{"Spacer", "[", "12", "]"}], ",", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{"PROBLEM", " ", "DETAILS"}], "-", 
+            RowBox[{"CLEARLY", " ", "VISIBLE"}]}], "*)"}], 
+          RowBox[{"Panel", "[", 
+           RowBox[{
+            RowBox[{"Column", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"Style", "[", 
+                 RowBox[{
+                  
+                  RowBox[{"\"\<\|01f4cb SELECTED PROBLEM: \>\"", "<>", 
+                   "selectedProblem"}], ",", "18", ",", "Bold", ",", "Blue"}],
+                  "]"}], ",", 
+                RowBox[{"Spacer", "[", "10", "]"}], ",", 
+                RowBox[{"(*", 
+                 RowBox[{"Problem", " ", "Statement", " ", "Box"}], "*)"}], 
+                RowBox[{"Panel", "[", 
+                 RowBox[{
+                  RowBox[{"Column", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    
+                    RowBox[{"\"\<Problem Statement\>\"", ",", "16", ",", 
+                    "Bold", ",", "Purple"}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "5", "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"\"\<\\\"\>\"", "<>", 
+                    RowBox[{"problemData", "[", "\"\<Statement\>\"", "]"}], 
+                    "<>", "\"\<\\\"\>\""}], ",", "14", ",", "Italic", ",", 
+                    "Blue"}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "12", "]"}], ",", 
+                    RowBox[{"Grid", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Context:\>\"", ",", "Bold", ",", "13"}], 
+                    "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"problemData", "[", "\"\<Context\>\"", "]"}], ",",
+                     "13"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Goal:\>\"", ",", "Bold", ",", "13"}], "]"}], 
+                    ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"problemData", "[", "\"\<Goal\>\"", "]"}], ",", 
+                    "13"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Constraint:\>\"", ",", "Bold", ",", "13"}], 
+                    "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"problemData", "[", "\"\<Constraint\>\"", "]"}], ",",
+                     "13"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Timeframe:\>\"", ",", "Bold", ",", "13"}], 
+                    "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"problemData", "[", "\"\<Timeframe\>\"", "]"}], ",",
+                     "13"}], "]"}]}], "}"}]}], "}"}], ",", 
+                    RowBox[{"Alignment", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"{", 
+                    RowBox[{"Right", ",", "Left"}], "}"}], "}"}]}], ",", 
+                    RowBox[{"Spacings", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"3", ",", "2"}], "}"}]}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"Alignment", "->", "Left"}]}], "]"}], ",", 
+                  RowBox[{"Background", "->", 
+                   RowBox[{"Lighter", "[", 
+                    RowBox[{"Blue", ",", "0.98"}], "]"}]}], ",", 
+                  RowBox[{"FrameMargins", "->", "20"}]}], "]"}], ",", 
+                RowBox[{"Spacer", "[", "15", "]"}], ",", 
+                RowBox[{"(*", 
+                 RowBox[{"ASSUMPTIONS", "-", 
+                  RowBox[{"CLEARLY", " ", "VISIBLE"}]}], "*)"}], 
+                RowBox[{"Style", "[", 
+                 
+                 RowBox[{"\"\<\|01f4ca IDENTIFIED ASSUMPTIONS (Explorable via \
+Sliders)\>\"", ",", "16", ",", "Bold", ",", "Purple"}], "]"}], ",", 
+                RowBox[{"Spacer", "[", "8", "]"}], ",", 
+                RowBox[{"Grid", "[", 
+                 RowBox[{
+                  RowBox[{"Prepend", "[", 
+                   RowBox[{
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"assumptions", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", "Bold", ",", 
+                    "13"}], "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"assumptions", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "2"}], "]"}], "]"}], ",", "13"}], 
+                    "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", 
+                    RowBox[{"Length", "[", "assumptions", "]"}]}], "}"}]}], 
+                    "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    
+                    RowBox[{"\"\<Assumption\>\"", ",", "Bold", ",", "14", ",",
+                     "White"}], "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    
+                    RowBox[{"\"\<Description\>\"", ",", "Bold", ",", "14", ",",
+                     "White"}], "]"}]}], "}"}]}], "]"}], ",", 
+                  RowBox[{"Frame", "->", "All"}], ",", 
+                  RowBox[{"Background", "->", 
+                   RowBox[{"{", 
+                    RowBox[{"None", ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Darker", "[", "Purple", "]"}], ",", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"EvenQ", "[", "i", "]"}], ",", 
+                    RowBox[{"Lighter", "[", 
+                    RowBox[{"Purple", ",", "0.97"}], "]"}], ",", "White"}], 
+                    "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", 
+                    RowBox[{"Length", "[", "assumptions", "]"}]}], "}"}]}], 
+                    "]"}]}], "}"}]}], "}"}]}], ",", 
+                  RowBox[{"Alignment", "->", 
+                   RowBox[{"{", 
+                    RowBox[{"{", 
+                    RowBox[{"Left", ",", "Left"}], "}"}], "}"}]}], ",", 
+                  RowBox[{"Spacings", "->", 
+                   RowBox[{"{", 
+                    RowBox[{"3", ",", "2"}], "}"}]}], ",", 
+                  RowBox[{"FrameStyle", "->", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{"Purple", ",", 
+                    RowBox[{"Thickness", "[", "0.002", "]"}]}], "]"}]}], ",", 
+                  RowBox[{"ItemSize", "->", 
+                   RowBox[{"{", 
+                    RowBox[{"{", 
+                    RowBox[{"25", ",", "70"}], "}"}], "}"}]}]}], "]"}]}], 
+               "}"}], ",", 
+              RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+            RowBox[{"Background", "->", "White"}], ",", 
+            RowBox[{"FrameMargins", "->", "20"}]}], "]"}], ",", 
+          RowBox[{"Spacer", "[", "12", "]"}], ",", 
+          RowBox[{"(*", 
+           RowBox[{"STATUS", " ", "CARDS"}], "*)"}], 
+          RowBox[{"Panel", "[", 
+           RowBox[{
+            RowBox[{"Row", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"DrawCard", "[", 
+                 RowBox[{"\"\<Year\>\"", ",", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"Round", "[", 
+                    RowBox[{"iyrb", ",", "0.1"}], "]"}], "]"}], ",", "Purple",
+                   ",", "\"\<\|01f4c5\>\""}], "]"}], ",", 
+                RowBox[{"Spacer", "[", "6", "]"}], ",", 
+                RowBox[{"DrawCard", "[", 
+                 RowBox[{"\"\<Hour\>\"", ",", 
+                  RowBox[{
+                   RowBox[{"ToString", "[", "ihour", "]"}], 
+                   "<>", "\"\<:00\>\""}], ",", "Blue", 
+                  ",", "\"\<\:23f0\>\""}], "]"}], ",", 
+                RowBox[{"Spacer", "[", "6", "]"}], ",", 
+                RowBox[{"DrawCard", "[", 
+                 RowBox[{"\"\<Demand\>\"", ",", 
+                  RowBox[{
+                   RowBox[{"ToString", "[", 
+                    RowBox[{"currentState", "[", "\"\<Demand\>\"", "]"}], 
+                    "]"}], "<>", "\"\< \>\"", "<>", "unit"}], ",", "Blue", 
+                  ",", "\"\<\|01f4ca\>\""}], "]"}], ",", 
+                RowBox[{"Spacer", "[", "6", "]"}], ",", 
+                RowBox[{"DrawCard", "[", 
+                 RowBox[{"\"\<Capacity\>\"", ",", 
+                  RowBox[{
+                   RowBox[{"ToString", "[", 
+                    RowBox[{"currentState", "[", "\"\<Capacity\>\"", "]"}], 
+                    "]"}], "<>", "\"\< \>\"", "<>", "unit"}], ",", "Green", ",",
+                   "icon"}], "]"}], ",", 
+                RowBox[{"Spacer", "[", "6", "]"}], ",", 
+                RowBox[{"DrawCard", "[", 
+                 RowBox[{"\"\<Unserved\>\"", ",", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"currentState", "[", "\"\<Unserved\>\"", "]"}], 
+                   "]"}], ",", 
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"currentState", "[", "\"\<Unserved\>\"", "]"}], ">", 
+                    RowBox[{"baseCap", "*", "0.15"}]}], ",", "Red", ",", 
+                    "Green"}], "]"}], ",", "\"\<\:26a0\:fe0f\>\""}], "]"}], ",", 
+                RowBox[{"Spacer", "[", "12", "]"}], ",", 
+                RowBox[{"DrawStatus", "[", 
+                 RowBox[{"currentState", "[", "\"\<Stress\>\"", "]"}], 
+                 "]"}]}], "}"}], ",", 
+              RowBox[{"Spacer", "[", "6", "]"}]}], "]"}], ",", 
+            RowBox[{"Background", "->", 
+             RowBox[{"Lighter", "[", 
+              RowBox[{"Gray", ",", "0.96"}], "]"}]}], ",", 
+            RowBox[{"FrameMargins", "->", "12"}]}], "]"}], ",", 
+          RowBox[{"Spacer", "[", "12", "]"}], ",", 
+          RowBox[{"(*", "TABS", "*)"}], 
+          RowBox[{"TabView", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"\"\<\|01f3ae Simulation\>\"", "->", 
+              RowBox[{"Grid", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Panel", "[", 
+                    RowBox[{
+                    RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"icon", "<>", "\"\< SYSTEM VISUALIZATION\>\""}], ",",
+                     "Bold", ",", "14", ",", "Blue"}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "6", "]"}], ",", 
+                    RowBox[{"DrawVisualization", "[", 
+                    RowBox[{"vizType", ",", 
+                    RowBox[{"currentState", "[", "\"\<Utilization\>\"", "]"}],
+                     ",", "itolerance"}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "12", "]"}], ",", 
+                    RowBox[{"BarChart", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"currentState", "[", "\"\<Demand\>\"", "]"}], ",", 
+                    RowBox[{"currentState", "[", "\"\<Capacity\>\"", "]"}], ",", 
+                    RowBox[{"Max", "[", 
+                    RowBox[{"0", ",", 
+                    RowBox[{"currentState", "[", "\"\<Unserved\>\"", "]"}]}], 
+                    "]"}]}], "}"}], ",", 
+                    RowBox[{"ChartLabels", "->", 
+                    RowBox[{"Placed", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    
+                    RowBox[{"\"\<Demand\>\"", ",", "\"\<Capacity\>\"", 
+                    ",", "\"\<Unserved\>\""}], "}"}], ",", "Below"}], "]"}]}],
+                     ",", 
+                    RowBox[{"ChartStyle", "->", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Blue", ",", 
+                    RowBox[{"Opacity", "[", "0.8", "]"}]}], "]"}], ",", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Green", ",", 
+                    RowBox[{"Opacity", "[", "0.8", "]"}]}], "]"}], ",", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Red", ",", 
+                    RowBox[{"Opacity", "[", "0.8", "]"}]}], "]"}]}], "}"}]}], 
+                    ",", 
+                    RowBox[{"ImageSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"280", ",", "170"}], "}"}]}], ",", 
+                    RowBox[{
+                    "ChartElementFunction", "->", "\"\<GlassRectangle\>\""}], 
+                    ",", 
+                    RowBox[{"PlotLabel", "->", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    
+                    RowBox[{"\"\<System Snapshot (\>\"", "<>", "unit", 
+                    "<>", "\"\<)\>\""}], ",", "12", ",", "Bold"}], "]"}]}]}], 
+                    "]"}]}], "}"}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+                    RowBox[{"Background", "->", "White"}], ",", 
+                    RowBox[{"FrameMargins", "->", "16"}]}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "12", "]"}], ",", 
+                    RowBox[{"Panel", "[", 
+                    RowBox[{
+                    RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    
+                    RowBox[{"\"\<\|01f4ca HEALTH\>\"", ",", "Bold", ",", "14",
+                     ",", "Purple"}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "6", "]"}], ",", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"DrawGauge", "[", 
+                    RowBox[{
+                    RowBox[{"currentState", "[", "\"\<Efficiency\>\"", "]"}], 
+                    ",", 
+                    RowBox[{"currentState", "[", "\"\<Stress\>\"", "]"}]}], 
+                    "]"}], ",", 
+                    RowBox[{"Spacer", "[", "12", "]"}], ",", 
+                    RowBox[{"DrawRadial", "[", 
+                    RowBox[{
+                    RowBox[{"currentState", "[", "\"\<Adoption\>\"", "]"}], ",",
+                     "iyrb"}], "]"}]}], "}"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+                    RowBox[{"Background", "->", "White"}], ",", 
+                    RowBox[{"FrameMargins", "->", "16"}]}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "12", "]"}], ",", 
+                    RowBox[{"Panel", "[", 
+                    RowBox[{
+                    RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    
+                    RowBox[{"\"\<\|01f9ee FLOW\>\"", ",", "Bold", ",", "14", ",",
+                     "Orange"}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "6", "]"}], ",", 
+                    RowBox[{"DrawFlowchart", "[", 
+                    RowBox[{"currentState", ",", "problemData"}], "]"}]}], 
+                    "}"}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+                    RowBox[{"Background", "->", 
+                    RowBox[{"Lighter", "[", 
+                    RowBox[{"Yellow", ",", "0.97"}], "]"}]}], ",", 
+                    RowBox[{"FrameMargins", "->", "12"}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+                   RowBox[{"Spacer", "[", "18", "]"}], ",", 
+                   RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Panel", "[", 
+                    RowBox[{
+                    RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    
+                    RowBox[{"\"\<\|01f4c8 DAILY PROFILE\>\"", ",", "Bold", ",",
+                     "14", ",", "Blue"}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "6", "]"}], ",", 
+                    RowBox[{"ListLinePlot", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    "dailyDemands", ",", "dailyCaps", ",", "dailyUnserved"}], 
+                    "}"}], ",", 
+                    RowBox[{"PlotStyle", "->", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Thick", ",", "Blue"}], "]"}], ",", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Thick", ",", "Dashed", ",", "Green"}], "]"}], ",", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Thick", ",", "Dotted", ",", "Red"}], "]"}]}], 
+                    "}"}]}], ",", 
+                    RowBox[{"Filling", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"3", "->", "Axis"}], "}"}]}], ",", 
+                    RowBox[{"FillingStyle", "->", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Red", ",", 
+                    RowBox[{"Opacity", "[", "0.2", "]"}]}], "]"}]}], ",", 
+                    RowBox[{"PlotLegends", "->", 
+                    RowBox[{"Placed", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    
+                    RowBox[{"\"\<Demand\>\"", ",", "\"\<Safe Cap\>\"", 
+                    ",", "\"\<Unserved\>\""}], "}"}], ",", "Bottom"}], 
+                    "]"}]}], ",", 
+                    RowBox[{"ImageSize", "->", "500"}], ",", 
+                    RowBox[{"AxesLabel", "->", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Hour\>\"", ",", "Bold"}], "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"unit", ",", "Bold"}], "]"}]}], "}"}]}], ",", 
+                    RowBox[{"GridLines", "->", "Automatic"}], ",", 
+                    RowBox[{"PlotRange", "->", "All"}], ",", 
+                    RowBox[{"Frame", "->", "True"}], ",", 
+                    RowBox[{"Epilog", "->", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"ihour", ">=", "6"}], "&&", 
+                    RowBox[{"ihour", "<=", "22"}]}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"Red", ",", 
+                    RowBox[{"PointSize", "[", "0.025", "]"}], ",", 
+                    RowBox[{"Point", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"ihour", ",", 
+                    RowBox[{"dailyDemands", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"ihour", "-", "5"}], "]"}], "]"}]}], "}"}], "]"}],
+                     ",", 
+                    RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    
+                    RowBox[{"\"\<\:25c4 Now\>\"", ",", "10", ",", "Bold", ",",
+                     "Red"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"ihour", "+", "0.7"}], ",", 
+                    RowBox[{"dailyDemands", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"ihour", "-", "5"}], "]"}], "]"}]}], "}"}]}], 
+                    "]"}]}], "}"}], ",", 
+                    RowBox[{"{", "}"}]}], "]"}]}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+                    RowBox[{"Background", "->", "White"}], ",", 
+                    RowBox[{"FrameMargins", "->", "16"}]}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "12", "]"}], ",", 
+                    RowBox[{"Panel", "[", 
+                    RowBox[{
+                    RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    
+                    RowBox[{"\"\<\|01f4ca STRATEGY\>\"", ",", "Bold", ",", 
+                    "14", ",", "Blue"}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "6", "]"}], ",", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Plot", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"GetCapacityFactor", "[", 
+                    RowBox[{"y", ",", "iprimary", ",", "istrat"}], "]"}], "*",
+                     "100"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"y", ",", "0", ",", "5"}], "}"}], ",", 
+                    RowBox[{"PlotLabel", "->", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"istrat", ",", "13", ",", "Bold"}], "]"}]}], ",", 
+                    RowBox[{"AxesLabel", "->", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Year\>\"", ",", "Bold"}], "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Increase %\>\"", ",", "Bold"}], "]"}]}], 
+                    "}"}]}], ",", 
+                    RowBox[{"ImageSize", "->", "320"}], ",", 
+                    RowBox[{"PlotStyle", "->", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Thick", ",", "Purple"}], "]"}]}], ",", 
+                    RowBox[{"Filling", "->", "Axis"}], ",", 
+                    RowBox[{"FillingStyle", "->", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Purple", ",", 
+                    RowBox[{"Opacity", "[", "0.25", "]"}]}], "]"}]}], ",", 
+                    RowBox[{"GridLines", "->", "Automatic"}], ",", 
+                    RowBox[{"Frame", "->", "True"}], ",", 
+                    RowBox[{"Epilog", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"Red", ",", 
+                    RowBox[{"PointSize", "[", "0.025", "]"}], ",", 
+                    RowBox[{"Point", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"iyrb", ",", 
+                    RowBox[{
+                    RowBox[{"GetCapacityFactor", "[", 
+                    RowBox[{"iyrb", ",", "iprimary", ",", "istrat"}], "]"}], "*",
+                     "100"}]}], "}"}], "]"}]}], "}"}]}]}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "12", "]"}], ",", 
+                    RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"DrawTimeline", "[", 
+                    RowBox[{"istrat", ",", "iyrb"}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "12", "]"}], ",", 
+                    RowBox[{"Panel", "[", 
+                    RowBox[{
+                    RowBox[{"Grid", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Boost:\>\"", ",", "Bold"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"Round", "[", 
+                    RowBox[{
+                    RowBox[{"GetCapacityFactor", "[", 
+                    RowBox[{"iyrb", ",", "iprimary", ",", "istrat"}], "]"}], "*",
+                     "100"}], "]"}], "]"}], "<>", "\"\<%\>\""}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Target:\>\"", ",", "Bold"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"Round", "[", 
+                    RowBox[{"iprimary", "*", "100"}], "]"}], "]"}], 
+                    "<>", "\"\<%\>\""}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Progress:\>\"", ",", "Bold"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"Round", "[", 
+                    RowBox[{
+                    RowBox[{"iyrb", "/", "5"}], "*", "100"}], "]"}], "]"}], 
+                    "<>", "\"\<%\>\""}]}], "}"}]}], "}"}], ",", 
+                    RowBox[{"Alignment", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"{", 
+                    RowBox[{"Right", ",", "Left"}], "}"}], "}"}]}], ",", 
+                    RowBox[{"Spacings", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"2", ",", "1"}], "}"}]}]}], "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Stats\>\"", ",", "Bold", ",", "11"}], "]"}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{"Left", ",", "Top"}], "}"}], ",", 
+                    RowBox[{"Background", "->", 
+                    RowBox[{"Lighter", "[", 
+                    RowBox[{"Yellow", ",", "0.95"}], "]"}]}]}], "]"}]}], 
+                    "}"}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}]}], "}"}], 
+                    "]"}]}], "}"}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+                    RowBox[{"Background", "->", "White"}], ",", 
+                    RowBox[{"FrameMargins", "->", "16"}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}]}], "}"}], 
+                 "}"}], ",", 
+                RowBox[{"Alignment", "->", "Top"}]}], "]"}]}], ",", 
+             RowBox[{"\"\<\|01f321\:fe0f Heatmap\>\"", "->", 
+              RowBox[{"Column", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"Panel", "[", 
+                  RowBox[{
+                   RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    
+                    RowBox[{"\"\<STRESS ANALYSIS: \>\"", "<>", 
+                    "selectedProblem"}], ",", "17", ",", "Bold", ",", 
+                    "Blue"}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "6", "]"}], ",", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"DensityPlot", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"ComputeSystemState", "[", 
+                    RowBox[{
+                    "y", ",", "h", ",", "iprimary", ",", "istrat", ",", 
+                    "isecondary", ",", "itolerance", ",", "ilag", ",", 
+                    "ibottleneck", ",", "iweath", ",", "baseCap"}], "]"}], 
+                    "[", "\"\<Utilization\>\"", "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"h", ",", "6", ",", "22"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"y", ",", "0", ",", "5"}], "}"}], ",", 
+                    RowBox[{"ColorFunction", "->", "\"\<TemperatureMap\>\""}],
+                     ",", 
+                    RowBox[{"PlotLegends", "->", 
+                    RowBox[{"Placed", "[", 
+                    RowBox[{"Automatic", ",", "Right"}], "]"}]}], ",", 
+                    RowBox[{"FrameLabel", "->", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Hour\>\"", ",", "Bold"}], "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Year\>\"", ",", "Bold"}], "]"}]}], "}"}]}], ",", 
+                    RowBox[{"ImageSize", "->", "520"}], ",", 
+                    RowBox[{"Frame", "->", "True"}], ",", 
+                    RowBox[{"GridLines", "->", "Automatic"}], ",", 
+                    RowBox[{"Epilog", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"White", ",", "Thick", ",", "Dashed", ",", 
+                    RowBox[{"Line", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"6", ",", "iyrb"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"22", ",", "iyrb"}], "}"}]}], "}"}], "]"}], ",", 
+                    RowBox[{"Line", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"ihour", ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"ihour", ",", "5"}], "}"}]}], "}"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"White", ",", 
+                    RowBox[{"Opacity", "[", "0.75", "]"}], ",", 
+                    RowBox[{"Disk", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"ihour", ",", "iyrb"}], "}"}], ",", "0.35"}], 
+                    "]"}]}], "}"}], ",", 
+                    RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    
+                    RowBox[{"\"\<\[FilledCircle]\>\"", ",", "22", ",", 
+                    "Red"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"ihour", ",", "iyrb"}], "}"}]}], "]"}]}], 
+                    "}"}]}]}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "18", "]"}], ",", 
+                    RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    
+                    RowBox[{"\"\<\|01f4ca YEARLY\>\"", ",", "Bold", ",", "13",
+                     ",", "Purple"}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "10", "]"}], ",", 
+                    RowBox[{"ListLinePlot", "[", 
+                    RowBox[{"yearlyUnserved", ",", 
+                    RowBox[{"PlotStyle", "->", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Thick", ",", "Red"}], "]"}]}], ",", 
+                    RowBox[{"Filling", "->", "Axis"}], ",", 
+                    RowBox[{"FillingStyle", "->", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Red", ",", 
+                    RowBox[{"Opacity", "[", "0.3", "]"}]}], "]"}]}], ",", 
+                    RowBox[{"ImageSize", "->", "270"}], ",", 
+                    RowBox[{"AxesLabel", "->", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Year\>\"", ",", "Bold"}], "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Unserved\>\"", ",", "Bold"}], "]"}]}], 
+                    "}"}]}], ",", 
+                    RowBox[{"GridLines", "->", "Automatic"}], ",", 
+                    RowBox[{"Frame", "->", "True"}], ",", 
+                    RowBox[{"PlotRange", "->", "All"}]}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "16", "]"}], ",", 
+                    RowBox[{"Panel", "[", 
+                    RowBox[{
+                    RowBox[{"Grid", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Critical:\>\"", ",", "Bold"}], "]"}], ",", 
+                    RowBox[{"Length", "[", 
+                    RowBox[{"Select", "[", 
+                    RowBox[{"dailyData", ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "[", "\"\<Stress\>\"", "]"}], 
+                    "==", "\"\<Critical\>\""}], "&"}]}], "]"}], "]"}]}], 
+                    "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Avg Util:\>\"", ",", "Bold"}], "]"}], ",", 
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"Round", "[", 
+                    RowBox[{
+                    RowBox[{"Mean", "[", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "[", "\"\<Utilization\>\"", "]"}], "&"}], ",",
+                     "dailyData"}], "]"}], "]"}], ",", "0.01"}], "]"}], 
+                    "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Total Unserved:\>\"", ",", "Bold"}], "]"}], ",", 
+                    RowBox[{"Total", "[", "dailyUnserved", "]"}]}], "}"}]}], 
+                    "}"}], ",", 
+                    RowBox[{"Alignment", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"{", 
+                    RowBox[{"Right", ",", "Left"}], "}"}], "}"}]}], ",", 
+                    RowBox[{"Spacings", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"2", ",", "1"}], "}"}]}]}], "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Summary\>\"", ",", "Bold", ",", "12"}], 
+                    "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"Left", ",", "Top"}], "}"}], ",", 
+                    RowBox[{"Background", "->", 
+                    RowBox[{"Lighter", "[", 
+                    RowBox[{"Yellow", ",", "0.95"}], "]"}]}]}], "]"}]}], 
+                    "}"}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}]}], "}"}], 
+                    "]"}]}], "}"}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+                   RowBox[{"Background", "->", "White"}], ",", 
+                   RowBox[{"FrameMargins", "->", "20"}]}], "]"}], "}"}], ",", 
+                RowBox[{"Alignment", "->", "Center"}]}], "]"}]}], ",", 
+             RowBox[{"\"\<\|01f9e0 Logic\>\"", "->", 
+              RowBox[{"Column", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"Panel", "[", 
+                  RowBox[{
+                   RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    
+                    RowBox[{"\"\<COMPUTATIONAL LOGIC: \>\"", "<>", 
+                    "selectedProblem"}], ",", "17", ",", "Bold", ",", 
+                    "Purple"}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "10", "]"}], ",", 
+                    RowBox[{"Grid", "[", 
+                    RowBox[{"logic", ",", 
+                    RowBox[{"Frame", "->", "All"}], ",", 
+                    RowBox[{"Background", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"None", ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Lighter", "[", 
+                    RowBox[{"Blue", ",", "0.97"}], "]"}], ",", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{"White", ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Length", "[", "logic", "]"}], "-", "1"}], 
+                    "}"}]}], "]"}]}], "}"}]}], "}"}]}], ",", 
+                    RowBox[{"Alignment", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"{", 
+                    RowBox[{"Left", ",", "Left"}], "}"}], "}"}]}], ",", 
+                    RowBox[{"Spacings", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"3", ",", "2.5"}], "}"}]}], ",", 
+                    RowBox[{"FrameStyle", "->", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Gray", ",", 
+                    RowBox[{"Thickness", "[", "0.001", "]"}]}], "]"}]}], ",", 
+                    RowBox[{"ItemSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"{", 
+                    RowBox[{"35", ",", "60"}], "}"}], "}"}]}]}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "16", "]"}], ",", 
+                    RowBox[{"Panel", "[", 
+                    RowBox[{
+                    RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    
+                    RowBox[{"\"\<\|01f4a1 KEY INSIGHTS:\>\"", ",", "Bold", ",",
+                     "14", ",", "Orange"}], "]"}], ",", 
+                    RowBox[{"Spacer", "[", "6", "]"}], 
+                    ",", "\"\<\[Bullet] Problem-specific assumptions drive \
+unique outcomes\>\"", 
+                    ",", "\"\<\[Bullet] Each domain has different constraints \
+and bottlenecks\>\"", 
+                    ",", "\"\<\[Bullet] Computational models make trade-offs \
+explicit\>\"", 
+                    ",", "\"\<\[Bullet] Interactive exploration reveals \
+sensitivity\>\""}], "}"}], ",", 
+                    RowBox[{"Spacing", "->", "6"}]}], "]"}], ",", 
+                    RowBox[{"Background", "->", 
+                    RowBox[{"Lighter", "[", 
+                    RowBox[{"Yellow", ",", "0.95"}], "]"}]}], ",", 
+                    RowBox[{"FrameMargins", "->", "16"}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+                   RowBox[{"Background", "->", "White"}], ",", 
+                   RowBox[{"FrameMargins", "->", "22"}]}], "]"}], "}"}], ",", 
+                RowBox[{"Alignment", "->", "Center"}]}], "]"}]}]}], "}"}], 
+           "]"}], ",", 
+          RowBox[{"Spacer", "[", "12", "]"}], ",", 
+          RowBox[{"Panel", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             
+             RowBox[{"\"\<WOL02 Challenge 2026 - What-If Engine\>\"", ",", 
+              "10", ",", "Bold", ",", "Gray"}], "]"}], ",", 
+            RowBox[{"Background", "->", 
+             RowBox[{"Lighter", "[", 
+              RowBox[{"Gray", ",", "0.97"}], "]"}]}], ",", 
+            RowBox[{"FrameMargins", "->", "12"}]}], "]"}]}], "}"}], ",", 
+        RowBox[{"Alignment", "->", "Center"}]}], "]"}]}]}], "]"}], ",", 
+   RowBox[{"(*", "CONTROLS", "*)"}], 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<\|01f3af SELECT PROBLEM\>\"", ",", "Bold", ",", "15", ",", 
+     "Purple"}], "]"}], ",", "Delimiter", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "selectedProblem", ",", "\"\<Mumbai Train Expansion\>\"", 
+       ",", "\"\<Problem\>\""}], "}"}], ",", 
+     RowBox[{"Keys", "[", "problemLibrary", "]"}], ",", 
+     RowBox[{"ControlType", "->", "PopupMenu"}]}], "}"}], ",", "Delimiter", ",", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<\:2699\:fe0f SCENARIO\>\"", ",", "Bold", ",", "15", ",", 
+     "Blue"}], "]"}], ",", "Delimiter", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "istrat", ",", "\"\<Linear\>\"", 
+       ",", "\"\<\|01f3d7\:fe0f Strategy\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\"\<Linear\>\"", ",", "\"\<Aggressive\>\"", 
+       ",", "\"\<Delayed Rollout\>\""}], "}"}], ",", 
+     RowBox[{"ControlType", "->", "SetterBar"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "iweath", ",", "\"\<Normal\>\"", 
+       ",", "\"\<\|01f324\:fe0f Weather\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\"\<Normal\>\"", ",", "\"\<Monsoon\>\"", 
+       ",", "\"\<Heatwave\>\""}], "}"}], ",", 
+     RowBox[{"ControlType", "->", "SetterBar"}]}], "}"}], ",", "Delimiter", ",", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<\:23f1\:fe0f TIME\>\"", ",", "Bold", ",", "15", ",", "Red"}],
+     "]"}], ",", "Delimiter", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ihour", ",", "8", ",", "\"\<\:23f0 Hour\>\""}], "}"}], ",", 
+     "6", ",", "22", ",", "1", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "->", "Small"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"iyrb", ",", "2.0", ",", "\"\<\|01f4c5 Year\>\""}], "}"}], ",", 
+     "0", ",", "5", ",", "0.1", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "->", "Small"}]}], "}"}], ",", "Delimiter", ",", 
+   RowBox[{"Style", "[", 
+    RowBox[{
+     RowBox[{"Dynamic", "[", 
+      RowBox[{"\"\<\|01f527 \>\"", "<>", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+          "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Primary\>\"", "]"}], 
+        "[", "\"\<Label\>\"", "]"}]}], "]"}], ",", "Bold", ",", "15", ",", 
+     "Gray"}], "]"}], ",", "Delimiter", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"iprimary", ",", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+           "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Primary\>\"", "]"}], 
+         "[", "\"\<Default\>\"", "]"}], "]"}], ",", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+            "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Primary\>\"", "]"}], 
+          "[", "\"\<Icon\>\"", "]"}], "<>", "\"\< \>\"", "<>", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+            "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Primary\>\"", "]"}], 
+          "[", "\"\<Label\>\"", "]"}]}], "]"}]}], "}"}], ",", 
+     RowBox[{"Dynamic", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+          "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Primary\>\"", "]"}], 
+        "[", "\"\<Range\>\"", "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
+     RowBox[{"Dynamic", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+          "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Primary\>\"", "]"}], 
+        "[", "\"\<Range\>\"", "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], "]"}], ",", "0.05", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "->", "Small"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"isecondary", ",", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+           "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Secondary\>\"", "]"}], 
+         "[", "\"\<Default\>\"", "]"}], "]"}], ",", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+            "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Secondary\>\"", "]"}],
+           "[", "\"\<Icon\>\"", "]"}], "<>", "\"\< \>\"", "<>", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+            "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Secondary\>\"", "]"}],
+           "[", "\"\<Label\>\"", "]"}]}], "]"}]}], "}"}], ",", 
+     RowBox[{"Dynamic", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+          "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Secondary\>\"", "]"}], 
+        "[", "\"\<Range\>\"", "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
+     RowBox[{"Dynamic", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+          "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Secondary\>\"", "]"}], 
+        "[", "\"\<Range\>\"", "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], "]"}], ",", "0.05", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "->", "Small"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"itolerance", ",", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+           "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Tolerance\>\"", "]"}], 
+         "[", "\"\<Default\>\"", "]"}], "]"}], ",", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+            "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Tolerance\>\"", "]"}],
+           "[", "\"\<Icon\>\"", "]"}], "<>", "\"\< \>\"", "<>", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+            "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Tolerance\>\"", "]"}],
+           "[", "\"\<Label\>\"", "]"}]}], "]"}]}], "}"}], ",", 
+     RowBox[{"Dynamic", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+          "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Tolerance\>\"", "]"}], 
+        "[", "\"\<Range\>\"", "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
+     RowBox[{"Dynamic", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+          "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Tolerance\>\"", "]"}], 
+        "[", "\"\<Range\>\"", "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], "]"}], ",", "0.05", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "->", "Small"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ilag", ",", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+           "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Lag\>\"", "]"}], 
+         "[", "\"\<Default\>\"", "]"}], "]"}], ",", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+            "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Lag\>\"", "]"}], 
+          "[", "\"\<Icon\>\"", "]"}], "<>", "\"\< \>\"", "<>", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+            "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Lag\>\"", "]"}], 
+          "[", "\"\<Label\>\"", "]"}]}], "]"}]}], "}"}], ",", 
+     RowBox[{"Dynamic", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+          "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Lag\>\"", "]"}], 
+        "[", "\"\<Range\>\"", "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
+     RowBox[{"Dynamic", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+          "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Lag\>\"", "]"}], 
+        "[", "\"\<Range\>\"", "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], "]"}], ",", "0.25", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "->", "Small"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ibottleneck", ",", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+           "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Bottleneck\>\"", "]"}],
+          "[", "\"\<Default\>\"", "]"}], "]"}], ",", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+            "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Bottleneck\>\"", 
+           "]"}], "[", "\"\<Icon\>\"", "]"}], "<>", "\"\< \>\"", "<>", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+            "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Bottleneck\>\"", 
+           "]"}], "[", "\"\<Label\>\"", "]"}]}], "]"}]}], "}"}], ",", 
+     RowBox[{"Dynamic", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+          "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Bottleneck\>\"", "]"}], 
+        "[", "\"\<Range\>\"", "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
+     RowBox[{"Dynamic", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"problemLibrary", "[", "selectedProblem", "]"}], 
+          "[", "\"\<Parameters\>\"", "]"}], "[", "\"\<Bottleneck\>\"", "]"}], 
+        "[", "\"\<Range\>\"", "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}], "]"}], ",", "0.05", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "->", "Small"}]}], "}"}], ",", 
+   RowBox[{"TrackedSymbols", ":>", 
+    RowBox[{"{", 
+     RowBox[{
+     "selectedProblem", ",", "ihour", ",", "iyrb", ",", "iprimary", ",", 
+      "istrat", ",", "isecondary", ",", "itolerance", ",", "ilag", ",", 
+      "ibottleneck", ",", "iweath"}], "}"}]}], ",", 
+   RowBox[{"ControlPlacement", "->", "Left"}], ",", 
+   RowBox[{"SynchronousUpdating", "->", "False"}], ",", 
+   RowBox[{"Initialization", ":>", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"iprimary", "=", "0.20"}], ";", 
+      RowBox[{"isecondary", "=", "0.15"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"itolerance", "=", "1.6"}], ";", 
+      RowBox[{"ilag", "=", "1.5"}], ";", 
+      RowBox[{"ibottleneck", "=", "0.85"}], ";"}], ")"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.978582101722658*^9, 3.978582101722658*^9}},
+ CellLabel->"In[57]:=",ExpressionUUID->"2c9b1c0c-72bc-cc42-9745-572a213ccdfb"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`ibottleneck$$ = 0.85, $CellContext`ihour$$ =
+     8, $CellContext`ilag$$ = 1.5, $CellContext`iprimary$$ = 
+    0.2, $CellContext`isecondary$$ = 0.15, $CellContext`istrat$$ = 
+    "Linear", $CellContext`itolerance$$ = 1.6, $CellContext`iweath$$ = 
+    "Normal", $CellContext`iyrb$$ = 2., $CellContext`selectedProblem$$ = 
+    "Mumbai Train Expansion", Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[
+       Style["\|01f3af SELECT PROBLEM", Bold, 15, 
+        RGBColor[0.5, 0, 0.5]]], Manipulate`Dump`ThisIsNotAControl, 
+      ControlType -> None}, {{
+       Hold[$CellContext`selectedProblem$$], "Mumbai Train Expansion", 
+       "Problem"}, {"Mumbai Train Expansion", "Public Transit Bus Fleet"}, 
+      ControlType -> PopupMenu}, {
+      Hold[
+       Style["\:2699\:fe0f SCENARIO", Bold, 15, 
+        RGBColor[0, 0, 1]]], Manipulate`Dump`ThisIsNotAControl, ControlType -> 
+      None}, {{
+       Hold[$CellContext`istrat$$], "Linear", "\|01f3d7\:fe0f Strategy"}, {
+      "Linear", "Aggressive", "Delayed Rollout"}, ControlType -> SetterBar}, {{
+       Hold[$CellContext`iweath$$], "Normal", "\|01f324\:fe0f Weather"}, {
+      "Normal", "Monsoon", "Heatwave"}, ControlType -> SetterBar}, {
+      Hold[
+       Style["\:23f1\:fe0f TIME", Bold, 15, 
+        RGBColor[1, 0, 0]]], Manipulate`Dump`ThisIsNotAControl, ControlType -> 
+      None}, {{
+       Hold[$CellContext`ihour$$], 8, "\:23f0 Hour"}, 6, 22, 1, ControlType -> 
+      Manipulator}, {{
+       Hold[$CellContext`iyrb$$], 2., "\|01f4c5 Year"}, 0, 5, 0.1, 
+      ControlType -> Manipulator}, {
+      Hold[
+       Style[
+        Dynamic[
+        "\|01f527 " <> \
+$CellContext`problemLibrary[$CellContext`selectedProblem$$]["Parameters"][
+          "Primary"]["Label"]], Bold, 15, 
+        GrayLevel[0.5]]], Manipulate`Dump`ThisIsNotAControl, ControlType -> 
+      None}, {{
+       Hold[$CellContext`iprimary$$], 
+       Dynamic[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Primary"]["Default"]], 
+       Dynamic[$CellContext`problemLibrary[$CellContext`selectedProblem$$][
+         "Parameters"]["Primary"]["Icon"] <> 
+        " " <> $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+         "Parameters"]["Primary"]["Label"]]}, 
+      Dynamic[
+       Part[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Primary"]["Range"], 1]], 
+      Dynamic[
+       Part[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Primary"]["Range"], 2]], 0.05, ControlType -> 
+      Manipulator}, {{
+       Hold[$CellContext`isecondary$$], 
+       Dynamic[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Secondary"]["Default"]], 
+       Dynamic[$CellContext`problemLibrary[$CellContext`selectedProblem$$][
+         "Parameters"]["Secondary"]["Icon"] <> 
+        " " <> $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+         "Parameters"]["Secondary"]["Label"]]}, 
+      Dynamic[
+       Part[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Secondary"]["Range"], 1]], 
+      Dynamic[
+       Part[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Secondary"]["Range"], 2]], 0.05, ControlType -> 
+      Manipulator}, {{
+       Hold[$CellContext`itolerance$$], 
+       Dynamic[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Tolerance"]["Default"]], 
+       Dynamic[$CellContext`problemLibrary[$CellContext`selectedProblem$$][
+         "Parameters"]["Tolerance"]["Icon"] <> 
+        " " <> $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+         "Parameters"]["Tolerance"]["Label"]]}, 
+      Dynamic[
+       Part[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Tolerance"]["Range"], 1]], 
+      Dynamic[
+       Part[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Tolerance"]["Range"], 2]], 0.05, ControlType -> 
+      Manipulator}, {{
+       Hold[$CellContext`ilag$$], 
+       Dynamic[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Lag"]["Default"]], 
+       Dynamic[$CellContext`problemLibrary[$CellContext`selectedProblem$$][
+         "Parameters"]["Lag"]["Icon"] <> 
+        " " <> $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+         "Parameters"]["Lag"]["Label"]]}, 
+      Dynamic[
+       Part[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Lag"]["Range"], 1]], 
+      Dynamic[
+       Part[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Lag"]["Range"], 2]], 0.25, ControlType -> 
+      Manipulator}, {{
+       Hold[$CellContext`ibottleneck$$], 
+       Dynamic[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Bottleneck"]["Default"]], 
+       Dynamic[$CellContext`problemLibrary[$CellContext`selectedProblem$$][
+         "Parameters"]["Bottleneck"]["Icon"] <> 
+        " " <> $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+         "Parameters"]["Bottleneck"]["Label"]]}, 
+      Dynamic[
+       Part[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Bottleneck"]["Range"], 1]], 
+      Dynamic[
+       Part[
+        $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+        "Parameters"]["Bottleneck"]["Range"], 2]], 0.05, ControlType -> 
+      Manipulator}}, Typeset`size$$ = {
+    811.7199999999999, {793.9123687084896, 798.4979157516864}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = False, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`ibottleneck$$ = Dynamic[
+          $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+          "Parameters"]["Bottleneck"]["Default"]], $CellContext`ihour$$ = 
+        8, $CellContext`ilag$$ = Dynamic[
+          $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+          "Parameters"]["Lag"]["Default"]], $CellContext`iprimary$$ = Dynamic[
+          $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+          "Parameters"]["Primary"]["Default"]], $CellContext`isecondary$$ = 
+        Dynamic[
+          $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+          "Parameters"]["Secondary"]["Default"]], $CellContext`istrat$$ = 
+        "Linear", $CellContext`itolerance$$ = Dynamic[
+          $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+          "Parameters"]["Tolerance"]["Default"]], $CellContext`iweath$$ = 
+        "Normal", $CellContext`iyrb$$ = 2., $CellContext`selectedProblem$$ = 
+        "Mumbai Train Expansion"}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> 
+      DynamicModule[{$CellContext`currentState, $CellContext`dailyData, \
+$CellContext`dailyDemands, $CellContext`dailyCaps, \
+$CellContext`dailyUnserved, $CellContext`yearlyData, \
+$CellContext`yearlyUnserved, $CellContext`problemData, $CellContext`baseCap, \
+$CellContext`params, $CellContext`assumptions, $CellContext`logic, \
+$CellContext`vizType, $CellContext`unit, $CellContext`icon}, \
+$CellContext`problemData = \
+$CellContext`problemLibrary[$CellContext`selectedProblem$$]; \
+$CellContext`baseCap = $CellContext`problemData[
+          "BaseCap"]; $CellContext`params = $CellContext`problemData[
+          "Parameters"]; $CellContext`assumptions = $CellContext`problemData[
+          "Assumptions"]; $CellContext`logic = $CellContext`problemData[
+          
+          "ComputationalLogic"]; $CellContext`vizType = \
+$CellContext`problemData[
+          "VisualizationType"]; $CellContext`unit = $CellContext`problemData[
+          "Unit"]; $CellContext`icon = $CellContext`problemData[
+          "Icon"]; $CellContext`currentState = \
+$CellContext`ComputeSystemState[$CellContext`iyrb$$, $CellContext`ihour$$, \
+$CellContext`iprimary$$, $CellContext`istrat$$, $CellContext`isecondary$$, \
+$CellContext`itolerance$$, $CellContext`ilag$$, $CellContext`ibottleneck$$, \
+$CellContext`iweath$$, $CellContext`baseCap]; $CellContext`dailyData = \
+$CellContext`ComputeDay[$CellContext`iyrb$$, $CellContext`iprimary$$, \
+$CellContext`istrat$$, $CellContext`isecondary$$, $CellContext`itolerance$$, \
+$CellContext`ilag$$, $CellContext`ibottleneck$$, $CellContext`iweath$$, \
+$CellContext`baseCap]; $CellContext`dailyDemands = 
+         Map[#["Demand"]& , $CellContext`dailyData]; $CellContext`dailyCaps = 
+         Map[#["Capacity"] $CellContext`itolerance$$& , \
+$CellContext`dailyData]; $CellContext`dailyUnserved = 
+         Map[#["Unserved"]& , $CellContext`dailyData]; \
+$CellContext`yearlyData = Table[
+           $CellContext`ComputeSystemState[$CellContext`y, 
+            8, $CellContext`iprimary$$, $CellContext`istrat$$, \
+$CellContext`isecondary$$, $CellContext`itolerance$$, $CellContext`ilag$$, \
+$CellContext`ibottleneck$$, $CellContext`iweath$$, $CellContext`baseCap], \
+{$CellContext`y, 0, 5, 0.5}]; $CellContext`yearlyUnserved = 
+         Map[#["Unserved"]& , $CellContext`yearlyData]; Column[{
+           Panel[
+            Column[{
+              Row[{
+                Style["\|01f3af", 35], 
+                Spacer[15], 
+                Column[{
+                  Style[
+                  "UNIVERSAL WHAT-IF ENGINE", 26, Bold, White, FontFamily -> 
+                   "Arial"], 
+                  Style["Train & Bus Transit Modeling Platform", 12, Italic, 
+                   Lighter[Blue, 0.75]]}, $CellContext`Spacing -> 3]}], 
+              Spacer[8], 
+              Row[{
+                $CellContext`DrawWeather[$CellContext`iweath$$], 
+                Spacer[12], 
+                Style[$CellContext`iweath$$, 13, Bold, White], 
+                Spacer[40], 
+                Style["Strategy: ", 13, White], 
+                Style[$CellContext`istrat$$, 13, Bold, Yellow]}]}, Alignment -> 
+             Center], Background -> Darker[Blue], FrameMargins -> 18], 
+           Spacer[12], 
+           Panel[
+            Column[{
+              Style[
+              "\|01f4cb SELECTED PROBLEM: " <> $CellContext`selectedProblem$$,
+                18, Bold, Blue], 
+              Spacer[10], 
+              Panel[
+               Column[{
+                 Style["Problem Statement", 16, Bold, Purple], 
+                 Spacer[5], 
+                 Style[
+                 "\"" <> $CellContext`problemData["Statement"] <> "\"", 14, 
+                  Italic, Blue], 
+                 Spacer[12], 
+                 Grid[{{
+                    Style["Context:", Bold, 13], 
+                    Style[
+                    $CellContext`problemData["Context"], 13]}, {
+                    Style["Goal:", Bold, 13], 
+                    Style[
+                    $CellContext`problemData["Goal"], 13]}, {
+                    Style["Constraint:", Bold, 13], 
+                    Style[
+                    $CellContext`problemData["Constraint"], 13]}, {
+                    Style["Timeframe:", Bold, 13], 
+                    Style[
+                    $CellContext`problemData["Timeframe"], 13]}}, 
+                  Alignment -> {{Right, Left}}, Spacings -> {3, 2}]}, 
+                Alignment -> Left], Background -> Lighter[Blue, 0.98], 
+               FrameMargins -> 20], 
+              Spacer[15], 
+              Style[
+              "\|01f4ca IDENTIFIED ASSUMPTIONS (Explorable via Sliders)", 16, 
+               Bold, Purple], 
+              Spacer[8], 
+              Grid[
+               Prepend[
+                Table[{
+                  Style[
+                   Part[$CellContext`assumptions, $CellContext`i, 1], Bold, 
+                   13], 
+                  Style[
+                   Part[$CellContext`assumptions, $CellContext`i, 2], 
+                   13]}, {$CellContext`i, 1, 
+                  Length[$CellContext`assumptions]}], {
+                 Style["Assumption", Bold, 14, White], 
+                 Style["Description", Bold, 14, White]}], Frame -> All, 
+               Background -> {None, {
+                  Darker[Purple], 
+                  Table[
+                   If[
+                    EvenQ[$CellContext`i], 
+                    Lighter[Purple, 0.97], White], {$CellContext`i, 1, 
+                    Length[$CellContext`assumptions]}]}}, 
+               Alignment -> {{Left, Left}}, Spacings -> {3, 2}, FrameStyle -> 
+               Directive[Purple, 
+                 Thickness[0.002]], ItemSize -> {{25, 70}}]}, Alignment -> 
+             Center], Background -> White, FrameMargins -> 20], 
+           Spacer[12], 
+           Panel[
+            Row[{
+              $CellContext`DrawCard["Year", 
+               ToString[
+                Round[$CellContext`iyrb$$, 0.1]], Purple, "\|01f4c5"], 
+              Spacer[6], 
+              $CellContext`DrawCard[
+              "Hour", ToString[$CellContext`ihour$$] <> ":00", Blue, 
+               "\:23f0"], 
+              Spacer[6], 
+              $CellContext`DrawCard["Demand", ToString[
+                 $CellContext`currentState["Demand"]] <> 
+               " " <> $CellContext`unit, Blue, "\|01f4ca"], 
+              Spacer[6], 
+              $CellContext`DrawCard["Capacity", ToString[
+                 $CellContext`currentState["Capacity"]] <> 
+               " " <> $CellContext`unit, Green, $CellContext`icon], 
+              Spacer[6], 
+              $CellContext`DrawCard["Unserved", 
+               ToString[
+                $CellContext`currentState["Unserved"]], 
+               
+               If[$CellContext`currentState[
+                 "Unserved"] > $CellContext`baseCap 0.15, Red, Green], 
+               "\:26a0\:fe0f"], 
+              Spacer[12], 
+              $CellContext`DrawStatus[
+               $CellContext`currentState["Stress"]]}, 
+             Spacer[6]], Background -> Lighter[Gray, 0.96], FrameMargins -> 
+            12], 
+           Spacer[12], 
+           TabView[{"\|01f3ae Simulation" -> Grid[{{
+                 Column[{
+                   Panel[
+                    Column[{
+                    
+                    Style[$CellContext`icon <> " SYSTEM VISUALIZATION", Bold, 
+                    14, Blue], 
+                    Spacer[6], 
+                    $CellContext`DrawVisualization[$CellContext`vizType, 
+                    $CellContext`currentState[
+                    "Utilization"], $CellContext`itolerance$$], 
+                    Spacer[12], 
+                    BarChart[{
+                    $CellContext`currentState["Demand"], 
+                    $CellContext`currentState["Capacity"], 
+                    Max[0, 
+                    $CellContext`currentState["Unserved"]]}, ChartLabels -> 
+                    Placed[{"Demand", "Capacity", "Unserved"}, Below], 
+                    ChartStyle -> {
+                    Directive[Blue, 
+                    Opacity[0.8]], 
+                    Directive[Green, 
+                    Opacity[0.8]], 
+                    Directive[Red, 
+                    Opacity[0.8]]}, ImageSize -> {280, 170}, 
+                    ChartElementFunction -> "GlassRectangle", PlotLabel -> 
+                    Style["System Snapshot (" <> $CellContext`unit <> ")", 12,
+                     Bold]]}, Alignment -> Center], Background -> White, 
+                    FrameMargins -> 16], 
+                   Spacer[12], 
+                   Panel[
+                    Column[{
+                    Style["\|01f4ca HEALTH", Bold, 14, Purple], 
+                    Spacer[6], 
+                    Row[{
+                    $CellContext`DrawGauge[
+                    $CellContext`currentState["Efficiency"], 
+                    $CellContext`currentState["Stress"]], 
+                    Spacer[12], 
+                    $CellContext`DrawRadial[
+                    $CellContext`currentState[
+                    "Adoption"], $CellContext`iyrb$$]}]}, Alignment -> 
+                    Center], Background -> White, FrameMargins -> 16], 
+                   Spacer[12], 
+                   Panel[
+                    Column[{
+                    Style["\|01f9ee FLOW", Bold, 14, Orange], 
+                    Spacer[6], 
+                    $CellContext`DrawFlowchart[$CellContext`currentState, \
+$CellContext`problemData]}, Alignment -> Center], Background -> 
+                    Lighter[Yellow, 0.97], FrameMargins -> 12]}, Alignment -> 
+                  Center], 
+                 Spacer[18], 
+                 Column[{
+                   Panel[
+                    Column[{
+                    Style["\|01f4c8 DAILY PROFILE", Bold, 14, Blue], 
+                    Spacer[6], 
+                    
+                    ListLinePlot[{$CellContext`dailyDemands, \
+$CellContext`dailyCaps, $CellContext`dailyUnserved}, PlotStyle -> {
+                    Directive[Thick, Blue], 
+                    Directive[Thick, Dashed, Green], 
+                    Directive[Thick, Dotted, Red]}, Filling -> {3 -> Axis}, 
+                    FillingStyle -> Directive[Red, 
+                    Opacity[0.2]], PlotLegends -> 
+                    Placed[{"Demand", "Safe Cap", "Unserved"}, Bottom], 
+                    ImageSize -> 500, AxesLabel -> {
+                    Style["Hour", Bold], 
+                    Style[$CellContext`unit, Bold]}, GridLines -> Automatic, 
+                    PlotRange -> All, Frame -> True, Epilog -> If[
+                    
+                    And[$CellContext`ihour$$ >= 6, $CellContext`ihour$$ <= 
+                    22], {Red, 
+                    PointSize[0.025], 
+                    Point[{$CellContext`ihour$$, 
+                    
+                    Part[$CellContext`dailyDemands, $CellContext`ihour$$ - 
+                    5]}], 
+                    Text[
+                    Style[
+                    "\:25c4 Now", 10, Bold, Red], {$CellContext`ihour$$ + 0.7, 
+                    
+                    Part[$CellContext`dailyDemands, $CellContext`ihour$$ - 
+                    5]}]}, {}]]}, Alignment -> Center], Background -> White, 
+                    FrameMargins -> 16], 
+                   Spacer[12], 
+                   Panel[
+                    Column[{
+                    Style["\|01f4ca STRATEGY", Bold, 14, Blue], 
+                    Spacer[6], 
+                    Row[{
+                    
+                    Plot[$CellContext`GetCapacityFactor[$CellContext`y, \
+$CellContext`iprimary$$, $CellContext`istrat$$] 100, {$CellContext`y, 0, 5}, 
+                    PlotLabel -> Style[$CellContext`istrat$$, 13, Bold], 
+                    AxesLabel -> {
+                    Style["Year", Bold], 
+                    Style["Increase %", Bold]}, ImageSize -> 320, PlotStyle -> 
+                    Directive[Thick, Purple], Filling -> Axis, FillingStyle -> 
+                    Directive[Purple, 
+                    Opacity[0.25]], GridLines -> Automatic, Frame -> True, 
+                    Epilog -> {Red, 
+                    PointSize[0.025], 
+                    
+                    Point[{$CellContext`iyrb$$, \
+$CellContext`GetCapacityFactor[$CellContext`iyrb$$, $CellContext`iprimary$$, \
+$CellContext`istrat$$] 100}]}], 
+                    Spacer[12], 
+                    Column[{
+                    $CellContext`DrawTimeline[$CellContext`istrat$$, \
+$CellContext`iyrb$$], 
+                    Spacer[12], 
+                    Panel[
+                    Grid[{{
+                    Style["Boost:", Bold], ToString[
+                    
+                    Round[$CellContext`GetCapacityFactor[$CellContext`iyrb$$, \
+$CellContext`iprimary$$, $CellContext`istrat$$] 100]] <> "%"}, {
+                    Style["Target:", Bold], ToString[
+                    Round[$CellContext`iprimary$$ 100]] <> "%"}, {
+                    Style["Progress:", Bold], ToString[
+                    Round[($CellContext`iyrb$$/5) 100]] <> "%"}}, 
+                    Alignment -> {{Right, Left}}, Spacings -> {2, 1}], 
+                    Style["Stats", Bold, 11], {Left, Top}, Background -> 
+                    Lighter[Yellow, 0.95]]}, Alignment -> Center]}]}, 
+                    Alignment -> Center], Background -> White, FrameMargins -> 
+                    16]}, Alignment -> Center]}}, Alignment -> Top], 
+             "\|01f321\:fe0f Heatmap" -> Column[{
+                Panel[
+                 Column[{
+                   Style[
+                   "STRESS ANALYSIS: " <> $CellContext`selectedProblem$$, 17, 
+                    Bold, Blue], 
+                   Spacer[6], 
+                   Row[{
+                    DensityPlot[
+                    $CellContext`ComputeSystemState[$CellContext`y, \
+$CellContext`h, $CellContext`iprimary$$, $CellContext`istrat$$, \
+$CellContext`isecondary$$, $CellContext`itolerance$$, $CellContext`ilag$$, \
+$CellContext`ibottleneck$$, $CellContext`iweath$$, $CellContext`baseCap][
+                    "Utilization"], {$CellContext`h, 6, 22}, {$CellContext`y, 
+                    0, 5}, ColorFunction -> "TemperatureMap", PlotLegends -> 
+                    Placed[Automatic, Right], FrameLabel -> {
+                    Style["Hour", Bold], 
+                    Style["Year", Bold]}, ImageSize -> 520, Frame -> True, 
+                    GridLines -> Automatic, Epilog -> {White, Thick, Dashed, 
+                    
+                    Line[{{6, $CellContext`iyrb$$}, {
+                    22, $CellContext`iyrb$$}}], 
+                    
+                    Line[{{$CellContext`ihour$$, 0}, {$CellContext`ihour$$, 
+                    5}}], {White, 
+                    Opacity[0.75], 
+                    Disk[{$CellContext`ihour$$, $CellContext`iyrb$$}, 0.35]}, 
+                    Text[
+                    Style[
+                    "\[FilledCircle]", 22, 
+                    Red], {$CellContext`ihour$$, $CellContext`iyrb$$}]}], 
+                    Spacer[18], 
+                    Column[{
+                    Style["\|01f4ca YEARLY", Bold, 13, Purple], 
+                    Spacer[10], 
+                    
+                    ListLinePlot[$CellContext`yearlyUnserved, PlotStyle -> 
+                    Directive[Thick, Red], Filling -> Axis, FillingStyle -> 
+                    Directive[Red, 
+                    Opacity[0.3]], ImageSize -> 270, AxesLabel -> {
+                    Style["Year", Bold], 
+                    Style["Unserved", Bold]}, GridLines -> Automatic, Frame -> 
+                    True, PlotRange -> All], 
+                    Spacer[16], 
+                    Panel[
+                    Grid[{{
+                    Style["Critical:", Bold], 
+                    Length[
+                    
+                    Select[$CellContext`dailyData, #["Stress"] == 
+                    "Critical"& ]]}, {
+                    Style["Avg Util:", Bold], 
+                    ToString[
+                    Round[
+                    Mean[
+                    Map[#["Utilization"]& , $CellContext`dailyData]], 
+                    0.01]]}, {
+                    Style["Total Unserved:", Bold], 
+                    Total[$CellContext`dailyUnserved]}}, 
+                    Alignment -> {{Right, Left}}, Spacings -> {2, 1}], 
+                    Style["Summary", Bold, 12], {Left, Top}, Background -> 
+                    Lighter[Yellow, 0.95]]}, Alignment -> Center]}]}, 
+                  Alignment -> Center], Background -> White, FrameMargins -> 
+                 20]}, Alignment -> Center], "\|01f9e0 Logic" -> Column[{
+                Panel[
+                 Column[{
+                   Style[
+                   "COMPUTATIONAL LOGIC: " <> $CellContext`selectedProblem$$, 
+                    17, Bold, Purple], 
+                   Spacer[10], 
+                   
+                   Grid[$CellContext`logic, Frame -> All, 
+                    Background -> {None, {
+                    Lighter[Blue, 0.97], 
+                    Table[White, {Length[$CellContext`logic] - 1}]}}, 
+                    Alignment -> {{Left, Left}}, Spacings -> {3, 2.5}, 
+                    FrameStyle -> Directive[Gray, 
+                    Thickness[0.001]], ItemSize -> {{35, 60}}], 
+                   Spacer[16], 
+                   Panel[
+                    Column[{
+                    Style["\|01f4a1 KEY INSIGHTS:", Bold, 14, Orange], 
+                    Spacer[6], 
+                    "\[Bullet] Problem-specific assumptions drive unique \
+outcomes", "\[Bullet] Each domain has different constraints and bottlenecks", 
+                    "\[Bullet] Computational models make trade-offs explicit",
+                     "\[Bullet] Interactive exploration reveals \
+sensitivity"}, $CellContext`Spacing -> 6], Background -> 
+                    Lighter[Yellow, 0.95], FrameMargins -> 16]}, Alignment -> 
+                  Center], Background -> White, FrameMargins -> 22]}, 
+               Alignment -> Center]}], 
+           Spacer[12], 
+           Panel[
+            Style["WOL02 Challenge 2026 - What-If Engine", 10, Bold, Gray], 
+            Background -> Lighter[Gray, 0.97], FrameMargins -> 12]}, 
+          Alignment -> Center]], "Specifications" :> {
+        Style["\|01f3af SELECT PROBLEM", Bold, 15, 
+         RGBColor[0.5, 0, 0.5]], 
+        Delimiter, {{$CellContext`selectedProblem$$, "Mumbai Train Expansion",
+           "Problem"}, {"Mumbai Train Expansion", "Public Transit Bus Fleet"},
+          ControlType -> PopupMenu}, Delimiter, 
+        Style["\:2699\:fe0f SCENARIO", Bold, 15, 
+         RGBColor[0, 0, 1]], 
+        Delimiter, {{$CellContext`istrat$$, "Linear", 
+          "\|01f3d7\:fe0f Strategy"}, {
+         "Linear", "Aggressive", "Delayed Rollout"}, ControlType -> 
+         SetterBar}, {{$CellContext`iweath$$, "Normal", 
+          "\|01f324\:fe0f Weather"}, {"Normal", "Monsoon", "Heatwave"}, 
+         ControlType -> SetterBar}, Delimiter, 
+        Style["\:23f1\:fe0f TIME", Bold, 15, 
+         RGBColor[1, 0, 0]], 
+        Delimiter, {{$CellContext`ihour$$, 8, "\:23f0 Hour"}, 6, 22, 1, 
+         Appearance -> "Labeled", ImageSize -> 
+         Small}, {{$CellContext`iyrb$$, 2., "\|01f4c5 Year"}, 0, 5, 0.1, 
+         Appearance -> "Labeled", ImageSize -> Small}, Delimiter, 
+        Style[
+         Dynamic[
+         "\|01f527 " <> \
+$CellContext`problemLibrary[$CellContext`selectedProblem$$]["Parameters"][
+           "Primary"]["Label"]], Bold, 15, 
+         GrayLevel[0.5]], Delimiter, {{$CellContext`iprimary$$, 
+          Dynamic[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Primary"]["Default"]], 
+          
+          Dynamic[$CellContext`problemLibrary[$CellContext`selectedProblem$$][
+            "Parameters"]["Primary"]["Icon"] <> 
+           " " <> $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+            "Parameters"]["Primary"]["Label"]]}, 
+         Dynamic[
+          Part[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Primary"]["Range"], 1]], 
+         Dynamic[
+          Part[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Primary"]["Range"], 2]], 0.05, Appearance -> 
+         "Labeled", ImageSize -> Small}, {{$CellContext`isecondary$$, 
+          Dynamic[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Secondary"]["Default"]], 
+          
+          Dynamic[$CellContext`problemLibrary[$CellContext`selectedProblem$$][
+            "Parameters"]["Secondary"]["Icon"] <> 
+           " " <> $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+            "Parameters"]["Secondary"]["Label"]]}, 
+         Dynamic[
+          Part[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Secondary"]["Range"], 1]], 
+         Dynamic[
+          Part[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Secondary"]["Range"], 2]], 0.05, Appearance -> 
+         "Labeled", ImageSize -> Small}, {{$CellContext`itolerance$$, 
+          Dynamic[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Tolerance"]["Default"]], 
+          
+          Dynamic[$CellContext`problemLibrary[$CellContext`selectedProblem$$][
+            "Parameters"]["Tolerance"]["Icon"] <> 
+           " " <> $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+            "Parameters"]["Tolerance"]["Label"]]}, 
+         Dynamic[
+          Part[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Tolerance"]["Range"], 1]], 
+         Dynamic[
+          Part[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Tolerance"]["Range"], 2]], 0.05, Appearance -> 
+         "Labeled", ImageSize -> Small}, {{$CellContext`ilag$$, 
+          Dynamic[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Lag"]["Default"]], 
+          
+          Dynamic[$CellContext`problemLibrary[$CellContext`selectedProblem$$][
+            "Parameters"]["Lag"]["Icon"] <> 
+           " " <> $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+            "Parameters"]["Lag"]["Label"]]}, 
+         Dynamic[
+          Part[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Lag"]["Range"], 1]], 
+         Dynamic[
+          Part[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Lag"]["Range"], 2]], 0.25, Appearance -> "Labeled", 
+         ImageSize -> Small}, {{$CellContext`ibottleneck$$, 
+          Dynamic[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Bottleneck"]["Default"]], 
+          
+          Dynamic[$CellContext`problemLibrary[$CellContext`selectedProblem$$][
+            "Parameters"]["Bottleneck"]["Icon"] <> 
+           " " <> $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+            "Parameters"]["Bottleneck"]["Label"]]}, 
+         Dynamic[
+          Part[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Bottleneck"]["Range"], 1]], 
+         Dynamic[
+          Part[
+           $CellContext`problemLibrary[$CellContext`selectedProblem$$][
+           "Parameters"]["Bottleneck"]["Range"], 2]], 0.05, Appearance -> 
+         "Labeled", ImageSize -> Small}}, 
+      "Options" :> {
+       TrackedSymbols :> {$CellContext`selectedProblem$$, \
+$CellContext`ihour$$, $CellContext`iyrb$$, $CellContext`iprimary$$, \
+$CellContext`istrat$$, $CellContext`isecondary$$, $CellContext`itolerance$$, \
+$CellContext`ilag$$, $CellContext`ibottleneck$$, $CellContext`iweath$$}, 
+        ControlPlacement -> Left, SynchronousUpdating -> False}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{
+      1062.9643908157348`, {815.6310405834897, 820.2165876266865}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(($CellContext`iprimary$$ = 
+       0.2; $CellContext`isecondary$$ = 0.15; $CellContext`itolerance$$ = 
+       1.6; $CellContext`ilag$$ = 1.5; $CellContext`ibottleneck$$ = 0.85; 
+      Null); Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.9785821026330967`*^9, 3.9785827131855564`*^9, 
+  3.9785855234853935`*^9},
+ CellLabel->"Out[72]=",ExpressionUUID->"e3b13179-c5d0-a44a-ae65-e49abe41527e"]
+}, Open  ]]
+},
+WindowSize->{1141.2, 573.6},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"CloudPublishPath"->"/Published/whatif.nb"},
+Magnification:>0.8 Inherited,
+FrontEndVersion->"14.3 for Microsoft Windows (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"6e6e5b96-ee03-ba47-bb82-c31d358617be"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 115001, 2710, 3913, "Input",ExpressionUUID->"2c9b1c0c-72bc-cc42-9745-572a213ccdfb"],
+Cell[115580, 2734, 32336, 661, 1649, "Output",ExpressionUUID->"e3b13179-c5d0-a44a-ae65-e49abe41527e"]
+}, Open  ]]
+}
+]
+*)
+
