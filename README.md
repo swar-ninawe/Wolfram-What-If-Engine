@@ -1,6 +1,6 @@
 # 🏆 Wolfram What-If Engine
 
-### 🥈 2nd Runner-Up @ IdeaHub 3.0 Ideathon
+### 🥉 2nd Runner-Up @ IdeaHub 3.0 Ideathon
 
 **Transforming qualitative "what-if" policy questions into interactive computational models.**
 
