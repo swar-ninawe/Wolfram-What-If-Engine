@@ -1,156 +1,63 @@
-# ⭐ Universal What-If Engine  
-### Assumption-Aware Simulation for Urban Transport Policy
+# 🏆 Wolfram What-If Engine
 
-![Wolfram](https://img.shields.io/badge/Wolfram-Language-red?logo=wolfram&logoColor=white)
+### 🥈 2nd Runner-Up @ IdeaHub 3.0 Ideathon
 
-**Turn vague policy questions into computational experiments.**  
-Reveal *when*, *where*, and *why* urban transport systems fail.
+**Transforming qualitative "what-if" policy questions into interactive computational models.**
 
-*Built for planners, policymakers, researchers, and systems thinkers.*
+## 🌟 The Challenge
 
-## 🚦 Why This Project Exists
+This project was developed for **IdeaHub 3.0**, addressing the challenge of bridging the gap between informal language and structured computation.
 
-Most urban transport tools answer the wrong question.
+> **Problem Statement:** Use the Wolfram Language to explore how qualitative “what-if” questions can be transformed into explicit, interactive computational models across domains like urban systems and public policy.
 
-They ask:
-- How many passengers will we have?
-- What is the average congestion?
+## 🚀 Overview
 
-But real systems fail because:
-- Demand spikes at specific hours
-- Capacity is constrained by hidden bottlenecks
-- Human behavior changes slowly
-- Infrastructure rollout is mistimed
+The **Wolfram What-If Engine** is an assumption-aware simulation tool designed for urban transport planning. While traditional tools focus on static predictions, this engine focuses on **stress-testing decisions**. It reveals *when*, *where*, and *why* systems fail under specific policy interventions.
 
-**The Universal What-If Engine is designed to expose those failures before they happen.**
+## 🧠 Core Innovation: The Qualitative-to-Computational Bridge
 
-## 🧠 What This Is
+We move beyond "black-box" predictions by making the underlying logic transparent.
 
-A reusable, assumption-aware simulation engine that models public transport systems under policy interventions — hour-by-hour and year-by-year.
+* **From Vague Questions:** "What if we increase bus frequency but people are slow to switch from cars?"
+* **To Computable Models:** We map this to **Adoption Lag**, **Mode Shift**, and **Bottleneck Capacity** variables.
+* **Outcome:** A dynamic simulation that identifies "threshold effects"—the exact moment a system collapses.
 
-Current domains:
-- 🚆 Urban train expansion  
-- 🚌 Public bus fleet expansion  
+## 🏗️ How It Works
 
-Same engine. Different constraints.
+1. **Input:** A semi-structured "what-if" scenario.
+2. **Assumption Mapping:** Identifying variables like *Crowding Tolerance* and *Strategy Rollout*.
+3. **Computational Core:** A unified function `ComputeSystemState[...]` ensures consistency.
+4. **Stress Simulation:** Hour-by-hour and year-by-year modeling.
+5. **Visual Diagnostics:** Heatmaps and daily profiles that expose peak-hour failures.
 
-## 🎯 What This Is Not
+## 🔧 Explicit Assumptions (The Parameters)
 
-- Not a demand forecast  
-- Not a real-time dashboard  
-- Not a black-box AI predictor  
+| Assumption | Policy Representation |
+| --- | --- |
+| **Capacity Increase** | Physical supply expansion |
+| **Mode Shift** | Behavioral change and demand shift |
+| **Adoption Lag** | Inertia in public uptake |
+| **Strategy Preset** | Rollout timing (Linear vs. Aggressive vs. Back-loaded) |
 
-This tool is about **decision stress-testing**, not prediction.
+## 📊 Key Insights Captured
 
-## 🏗️ How It Works (High Level)
-
-Policy Question  
-↓  
-Explicit Assumptions  
-↓  
-Computational Core  
-↓  
-System Stress Simulation  
-↓  
-Visual Diagnostics  
-
-Every output comes from a single function: ComputeSystemState[year, hour, …]
-
-This guarantees **consistency, traceability, and debuggability**.
-
-## 🔧 Assumptions (Made Explicit)
-
-Each slider corresponds to a real policy assumption:
-
-| Assumption | What It Represents |
-|-----------|--------------------|
-| Capacity Increase | Supply expansion |
-| Mode Shift | Human behavior change |
-| Crowding Tolerance | Safety threshold |
-| Adoption Lag | Behavioral inertia |
-| Bottleneck Capacity | Physical constraints |
-| Strategy | Rollout timing |
-| Weather | External stress |
-
-If an assumption changes, the outcome changes.  
-Nothing is hidden.
-
-## 🧭 Strategy Presets (Critical Insight)
-
-Strategy controls **when capacity is delivered**, not how much.
-
-- **Linear** → Even rollout  
-- **Aggressive (Front-Loaded)** → Early investment  
-- **Back-Loaded** → Delayed deployment  
-
-Two strategies can reach the same final capacity —  
-only one avoids early-year collapse.
-
-## 📊 What the Visuals Tell You
-
-### Simulation View  
-Live snapshot of demand, capacity, unserved load, and system health.
-
-### Daily Profile  
-Shows why averages lie — failures occur at peak hours.
-
-### Strategy Curve  
-Separates policy intent from execution timing.
-
-### Heatmap (Stress Analysis)  
-Hour × Year grid revealing future failure windows.
-
-### Logic View  
-Maps vague questions to explicit equations.
-
-## 🔍 Why This Is Different
-
-Most planning tools optimize metrics.
-
-This engine exposes:
-- Hidden constraints  
-- Early failure points  
-- Trade-offs between speed and safety  
-- The cost of delayed investment  
-
-It answers **“When does this break?”**, not just **“Does this improve?”**
-
-## 🏙️ Where This Can Be Used
-
-- Urban transport planning  
-- Infrastructure budgeting  
-- Policy comparison and defense  
-- Climate stress testing  
-- Systems-thinking education  
-- Hackathons and research demos  
-
-## 📓 Notebook
-
-The full **interactive Wolfram Notebook (`.nb`)** used to build and demonstrate this engine is included **below in the repository**.
-
-It contains:
-- The complete computational core  
-- All visualizations and UI logic  
-- Live `Manipulate`-based exploration  
-
-Open the notebook in **Wolfram Mathematica** or **Wolfram Cloud** to interact with the model.
+* **Averages Lie:** System failures happen at the peaks, not in the daily averages.
+* **Timing Matters:** Two strategies can reach the same target, but one might cause a system collapse in Year 2 due to delayed investment.
+* **Threshold Effects:** Visualizing the exact point where "Unserved Load" becomes a systemic risk.
 
 ## 🛠️ Tech Stack
 
-- **Language:** Wolfram Language (Mathematica)  
-- **Core Constructs:** `Manipulate`, `DynamicModule`, `Associations`, `DensityPlot`  
-- **Deployment:** Wolfram Cloud compatible  
+* **Language:** Wolfram Language (Mathematica)
+* **Key Tech:** `Manipulate`, `DynamicModule`, `Associations`, `DensityPlot`.
+* **Format:** Interactive Wolfram Notebook (`.nb`) compatible with Wolfram Cloud.
 
-## 📌 Design Principles
+---
 
-- Assumptions over optimism  
-- Bottlenecks over averages  
-- Timing over final targets  
-- Transparency over black boxes  
+### 📂 Repository Structure
 
-## 🏁 Final Thought
+* `Project_Notebook.nb`: The primary interactive model.
+* `Documentation/`: Detailed logic and ideathon presentation materials.
 
-This model does not predict the future.  
-It reveals how our assumptions shape it — and where systems fail first.
+### 🏁 Final Thought
 
-⭐ If you believe systems should be tested before they are built, consider starring this repository.
+This project proves that computational thinking can make hidden risks visible. By making assumptions explicit, we allow policymakers to test their ideas in a safe, digital environment before a single dollar is spent on infrastructure.
